@@ -1,0 +1,15 @@
+#groups_vars
+
+
+
+openweather_location: Cranston 
+openweather_id: 5221659
+openweather_api: 6e2f1dc2071eeeeee731351ad7263e2a
+#
+
+
+google_api:  AIzaSyAvKD5IR4yTPFfWStjdKmUlXqpEO8aq2Wo 
+todoist_api: 46033f58839ce079933ddfb1a7a0562e81317303
+#todoist_api: 674ca3ef6384420b9273d8d41f9620aca2864a8c
+
+PIR_pin: 18

@@ -1,0 +1,111 @@
+---
+-   name: build platform servers
+    hosts: platform-servers
+    user: solo
+    become: true
+    roles:
+      - gluster-server
+      - docker-host-XU4
+
+
+# -   name: setup docker hosts
+#     hosts: platform
+#     user: solo
+#     become: true
+#     roles:
+
+#       - gluster-client
+
+- name: adminutl
+  hosts: adminutl
+  user: pi
+  become: true
+  roles:
+    - pitop
+    - adminutl
+    - base-pi
+    - tshoot
+
+
+
+- name: pitop
+  hosts: pitop
+  user: pi
+  become: true
+  roles:
+    - pitop
+    - kodi
+    - base-pi
+
+
+- name: docker lab/dev
+  hosts: docker-lab
+  user: pi
+  become: true
+  roles:
+    - gluster-client-PI
+    - docker-host-PI
+
+
+
+
+- name: INFRA-SRV Yavin
+  hosts: INFRA-SRV1
+  user: pi
+  become: true
+  roles:
+    - base-pi
+    - gluster-client-PI
+    - docker-host-PI
+    - INFRA-SRV-yavin
+
+
+- name: INFRA-SRV-Endor
+  hosts: INFRA-SRV2
+  user: solo
+  become: true
+  roles:
+#    - gluster-client-BPI
+    - docker-host-BPI
+
+
+
+
+- name: Rockets
+  hosts: rockets
+  user: pi
+  become: true
+  roles:
+    - gluster-client-PI
+    - rocket
+
+
+- name: Mirror
+  hosts: mirror
+  user: pi
+  become: true
+  roles:
+    - base-pi
+    - mirror
+    - gluster-client-PI
+
+
+
+#- name: HaProxy
+#  hosts: haproxy00
+#  user: pi
+#  become: true
+#  roles:
+#    - haproxy
+
+
+- name: Edge swarm
+  hosts: edge01
+  user: solo
+  become: true
+  roles:
+    - gluster-client-BPI
+    - docker-host-BPI
+
+
+

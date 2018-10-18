@@ -1,0 +1,53 @@
+---
+
+#- name: set hostname
+#use templates
+#
+
+
+
+# add armin user and put in sudo group
+
+
+
+
+
+
+# config.txt teplate
+# - name: set config.txt
+#   template: src=config.jinja dest=/boot/config.txt
+#   notify: reboot
+
+- name: disable swap
+  apt: 
+    name: dphys-swapfile
+    state: absent
+
+
+- name: update apt cache
+  apt:
+    update_cache: yes
+    
+    
+- name: install dstat
+  apt:
+    name: dstat
+    state: present
+
+
+- name: copy script 
+  copy:
+    src: files/zram.sh
+    dest: /usr/bin/zram.sh
+    owner: pi
+    group: pi
+    mode: 0777
+
+
+- name: check line in file
+  lineinfile:
+    dest: /etc/rc.local
+    regexp: '^/usr/bin/zram.sh'
+    line : '/usr/bin/zram.sh &'
+    insertbefore: 'exit 0'
+

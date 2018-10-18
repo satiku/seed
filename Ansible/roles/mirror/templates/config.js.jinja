@@ -1,0 +1,183 @@
+/* Magic Mirror Config Sample
+ *
+ * By Michael Teeuw http://michaelteeuw.nl
+ * MIT Licensed.
+ *
+ * For more information how you can configurate this file
+ * See https://github.com/MichMich/MagicMirror#configuration
+ *
+ */
+
+var config = {
+	address: "localhost", // Address to listen on, can be:
+	                      // - "localhost", "127.0.0.1", "::1" to listen on loopback interface
+	                      // - another specific IPv4/6 to listen on a specific interface
+	                      // - "", "0.0.0.0", "::" to listen on any interface
+	                      // Default, when address config is left out, is "localhost"
+	port: 8080,
+	ipWhitelist: ["127.0.0.1", "::ffff:127.0.0.1", "::1"], // Set [] to allow all IP addresses
+	                                                       // or add a specific IPv4 of 192.168.1.5 :
+	                                                       // ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.1.5"],
+	                                                       // or IPv4 range of 192.168.3.0 --> 192.168.3.15 use CIDR format :
+	                                                       // ["127.0.0.1", "::ffff:127.0.0.1", "::1", "::ffff:192.168.3.0/28"],
+
+	language: "en",
+	timeFormat: 24,
+	units: "imperial",
+	zoom: 0.8,
+
+	modules: [
+		{
+			module: "alert",
+		},
+		{
+			module: "updatenotification",
+			position: "top_bar"
+		},
+		{
+			module: "clock",
+			position: "top_left",
+			config: {
+				displaySeconds: false,
+			}
+		},
+		{
+			module: 'MMM-PIR-Sensor',
+			config: {
+				sensorPIN: {{  PIR_pin  }} ,
+			}
+		},
+		{
+			module: "calendar",
+			header: "US Holidays",
+			position: "top_left",
+			config: {
+				calendars: [
+					{
+						symbol: "calendar-check-o ",
+						maximumEntries: 5,
+						url: "webcal://www.calendarlabs.com/templates/ical/US-Holidays.ics"
+					}
+				]
+			}
+		},
+		{
+			module: "currentweather",
+			position: "top_right",
+			header: "Weather Today",
+			config: {
+				location: "{{  openweather_location  }}",
+				locationID: "{{  openweather_id  }}",  //ID from http://www.openweathermap.org/help/city_list.txt
+				appid: "{{  openweather_api  }}"
+			}
+		},
+		{
+			module: "weatherforecast",
+			position: "top_right",
+			header: "Weather Forecast",
+			config: {
+				location: "{{  openweather_location  }}",
+				locationID: "{{  openweather_id  }}",  //ID from http://www.openweathermap.org/help/city_list.txt
+				appid: "{{  openweather_api  }}"
+			}
+		},
+		{
+			module: 'MMM-Todoist',
+			position: 'top_right',
+			header: 'Todoist',
+			config: {
+				accessToken: '{{  todoist_api  }}',
+				maximumEntries: 60,
+				updateInterval: 60000,
+				fade: false,
+				projects: [2181938755, 2181883188, 2184028181, 2181882532]
+			}
+		},
+		{
+			module: "newsfeed",
+			position: "bottom_bar",
+			config: {
+				feeds: [
+					{
+						title: "New York Times",
+						url: "http://www.nytimes.com/services/xml/rss/nyt/HomePage.xml"
+					}
+				],
+				showSourceTitle: false,
+				showPublishDate: true
+			}
+		},
+		{
+			module: 'MMM-Traffic',
+			position: 'top_left',
+			classes: 'dimmed medium', //optional, default is 'bright medium', only applies to commute info not route_name
+			config: {
+				api_key: '{{  google_api  }}',
+				mode: 'driving',
+				origin: '1 Valley View Drive, Cranston, RI 02921',
+				destination: '55 Technology Way,  West Greenwich, RI 02817',
+				route_name: 'Home to Work',
+				changeColor: true,
+				showGreen: false,
+				limitYellow: 10, //Greater than 5% of journey time due to traffic
+				limitRed: 20, //Greater than 20% of journey time due to traffic
+				traffic_model: 'pessimistic',
+				interval: 120000 //2 minutes
+			}
+		},
+		{
+			module: 'MMM-Traffic',
+			position: 'top_left',
+			classes: 'dimmed medium', //optional, default is 'bright medium', only applies to commute info not route_name
+			config: {
+				api_key: '{{  google_api  }}',
+				mode: 'driving',
+				origin: '1 Valley View Drive, Cranston, RI 02921',
+				destination: '1174 Kingstown Rd, South Kingstown, RI 02879',
+				route_name: 'Home to RSC SK',
+				changeColor: true,
+				showGreen: false,
+				limitYellow: 10, //Greater than 5% of journey time due to traffic
+				limitRed: 20, //Greater than 20% of journey time due to traffic
+				traffic_model: 'pessimistic',
+				interval: 120000 //2 minutes
+			}
+		},
+		{
+			module: 'MMM-Traffic',
+			position: 'top_left',
+			classes: 'dimmed medium', //optional, default is 'bright medium', only applies to commute info not route_name
+			config: {
+				api_key: '{{  google_api  }}',
+				mode: 'driving',
+				origin: '1 Valley View Drive, Cranston, RI 02921',
+				destination: '100 Higginson Ave, Lincoln, RI 02865',
+				route_name: 'Home to RSC L',
+				changeColor: true,
+				showGreen: false,
+				limitYellow: 10, //Greater than 5% of journey time due to traffic
+				limitRed: 20, //Greater than 20% of journey time due to traffic
+				traffic_model: 'pessimistic',
+				interval: 120000 //2 minutes
+			}
+		},
+		{
+			module: "MMM-Reddit",
+			position: "bottom_center",
+			config: {
+		    		subreddit: ['raspberry_pi', 'science', 'linux'],
+					displayType: 'headlines',
+					count: 24,
+					show: 8,
+					width: 700,
+					showSubreddit: true,
+					colorText: false,
+					showThumbnail: false,
+			}
+		},
+	]
+
+};
+
+/*************** DO NOT EDIT THE LINE BELOW ***************/
+if (typeof module !== "undefined") {module.exports = config;}

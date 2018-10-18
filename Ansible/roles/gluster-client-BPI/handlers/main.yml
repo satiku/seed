@@ -1,0 +1,8 @@
+---
+- name: reload-ctdb
+  command:  "{{  item  }}"
+  with_items:			
+  - service smb stop
+  - service ctdb restart
+  - chkconfig ctdb on 
+  - chkconfig smb off

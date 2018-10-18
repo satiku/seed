@@ -1,0 +1,81 @@
+---
+
+# BPI
+# install docker compose 
+#
+#
+#
+#
+
+
+- name: install base packages
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - apt-transport-https
+    - ca-certificates
+    - curl
+    - gnupg2
+    - software-properties-common
+    - python-pip
+
+
+
+
+
+- name: add docker group
+  tags: configs
+
+  group:
+    name: docker
+    gid: 1002
+    state: present
+
+
+- name: add pi to docker group
+  tags: configs
+  user:
+    name: solo
+    groups: docker
+    append: yes
+
+
+
+- name: Add an Apt signing key, uses whichever key is at the URL
+  apt_key:
+    url: https://download.docker.com/linux/debian/gpg
+    state: present
+
+
+- apt_repository:
+    repo: deb [arch=armhf] https://download.docker.com/linux/debian stretch stable
+    state: present
+
+
+- name: update apt cache
+  apt:
+    update_cache: yes
+    
+
+
+- name: install docker-ce
+  apt: 
+    name: docker-ce=18.06.0~ce~3-0~debian  
+    state: present
+  tags: packages
+
+
+
+#- name: 
+#  pip: 
+#    name: docker-py
+
+
+    
+
+# - name: Execute the command in remote shell; stdout goes to the specified file on the remote.
+#   shell: curl -sSL https://get.docker.com  | sh 
+#   args:
+#     creates: /etc/docker/key.json
+

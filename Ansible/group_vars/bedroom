@@ -1,0 +1,9 @@
+#groups_vars
+
+hostname: bedroom-mediacenter
+#
+
+overscan_left: 6
+overscan_right: 6
+overscan_top: 16
+overscan_bottom: 16

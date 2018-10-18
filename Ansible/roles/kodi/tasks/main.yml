@@ -1,0 +1,34 @@
+---
+- name: install kodi
+  apt:
+    name: kodi=2:17.6-3~stretch
+    state: present
+  notify: prime-kodi
+
+- name: install avahi-daemon
+  apt:
+    name: avahi-daemon
+    state: present
+
+- name: add shortcut to desktop
+  become: yes
+  become_user: pi
+  copy: src=files/kodi.desktop dest=/home/pi/Desktop/kodi.desktop
+
+
+- name: add new source fill 
+  become: yes
+  become_user: pi
+  copy: src=files/sources.xml dest=/home/pi/.kodi/userdata/sources.xml
+
+- name: add webserver 
+  become: yes
+  become_user: pi
+  lineinfile:
+    dest: /home/pi/.kodi/userdata/guisettings.xml 
+    regexp: '<webserver>'
+    line: '        <webserver>true</webserver>'
+
+
+
+

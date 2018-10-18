@@ -1,0 +1,37 @@
+<sources>
+    <programs>
+        <default pathversion="1"></default>
+    </programs>
+    <video>
+        <default pathversion="1"></default>
+        <source>
+            <name>Movies</name>
+            <path pathversion="1">/drives/archive/Videos/Movies/</path>
+            <allowsharing>true</allowsharing>
+        </source>
+        <source>
+            <name>Shows</name>
+            <path pathversion="1">/drives/archive/Videos/Shows/</path>
+            <allowsharing>true</allowsharing>
+        </source>
+        <source>
+            <name>Videos</name>
+            <path pathversion="1">/drives/archive/Videos/</path>
+            <allowsharing>true</allowsharing>
+        </source>
+    </video>
+    <music>
+        <default pathversion="1"></default>
+    </music>
+    <pictures>
+        <default pathversion="1"></default>
+    </pictures>
+    <files>
+        <default pathversion="1"></default>
+        <source>
+            <name>Blamo</name>
+            <path pathversion="1">http://repo.mrblamo.xyz/</path>
+            <allowsharing>true</allowsharing>
+        </source>
+    </files>
+</sources>

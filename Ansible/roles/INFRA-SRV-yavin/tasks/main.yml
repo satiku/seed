@@ -1,0 +1,100 @@
+---
+
+
+#- name: load local bind image
+#  docker_image:
+#    name: bind
+#    load_path: /drives/platform/INFRA-SRV/yavin/images/bind.d05.10.tar
+#
+#
+#
+#
+#- name: load local tor-proxy image
+#  docker_image:
+#    name: tor-proxy
+#    load_path: /drives/platform/INFRA-SRV/yavin/images/tor-proxy.0.2.9.tar
+#
+#
+#- name: load local ddns image
+#  docker_image:
+#    name: ddns:yavin
+#    load_path: /gluster/gvol0/PROD/INFRA-SRV/yavin/images/ddns.yavin.tar
+#
+#
+#
+#
+#
+#
+#
+#
+#- name: start yavin bind container
+#  docker_container:
+#    name: bind
+#    image: bind
+#    restart_policy: always
+#    networks:
+#      - name: eth0_net
+#        ipv4_address: 10.3.11.13
+# 
+#
+#- name: start yavin ddns beacon container
+#  docker_container:
+#    name: ddns
+#    image: ddns:yavin
+#    restart_policy: always
+#
+#
+#
+#- name: start yavin tor-proxy container
+#  docker_container:
+#    name: tor-proxy
+#    image: tor-proxy:0.2.9
+#    restart_policy: always
+#    networks:
+#      - name: eth0_net
+#        ipv4_address: 10.3.11.15
+# 
+#
+#
+#
+#
+
+
+- name: start yavin pi-hole container
+  docker_container:
+    name: pihole
+    image: diginc/pi-hole-multiarch:v3.3_debian_armhf
+    restart_policy: always
+    capabilities: NET_ADMIN
+#   ports:  
+#      - "53:53/udp"
+#      - "53:53/tcp"
+#      - "80:80"
+    networks:
+      - name: eth0_net
+        ipv4_address: 10.3.11.11
+    env:
+      ServerIP: 10.3.11.11
+      DNS1: 10.3.11.13
+      DNS2: 1.1.1.1
+      WEBPASSWORD: Password1
+#    volumes:
+#      - /drives/platform/INFRA-SRV/yavin/volumes/pihole/etc/pihole:/etc/pihole
+#      - /drives/platform/INFRA-SRV/yavin/volumes/pihole/etc/dnsmasq.d:/etc/dnsmasq.d
+
+
+
+
+
+
+
+#
+#docker network create -d macvlan     --subnet=10.3.11.0/24     --gateway=10.3.11.1      -o parent=eth0 eth0_net
+
+
+
+
+#docker run -d  --restart=always --name bind   -p 53:53/tcp -p 53:53/udp     bind
+
+
+#docker run -d     --name pihole     --net=eth0_net --ip=10.3.11.11     -p 53:53/tcp -p 53:53/udp -p 80:80     -e ServerIP="10.3.11.11"     -e DNS1="10.3.11.13"  -e WEBPASSWORD="Password1"    --restart=always      diginc/pi-hole:arm

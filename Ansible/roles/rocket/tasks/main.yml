@@ -1,0 +1,69 @@
+---
+
+- name: check kernal modules
+  tags: configs
+
+  lineinfile:
+    path:  /etc/modules
+    regexp: '^bcm2835-v4l2'
+    line: 'bcm2835-v4l2'
+
+
+- name: install bcm-gpio
+  shell: wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.52.tar.gz  && tar -zxvf bcm2835-1.52.tar.gz   &&  cd bcm2835-1.52  &&  ./configure  &&  make  &&  make check  &&  make install
+  args:
+    chdir: /home/pi/
+    creates: bcm2835-1.52/README
+
+
+- name: add motion image 
+  become: yes
+  become_user: pi
+  copy: src=docker-images/rocket-motion0.1.tar dest=/home/pi/docker-images/rocket-motion0.1.tar
+
+  
+
+- name: add nodered image 
+  become: yes
+  become_user: pi
+  copy: src=docker-images/rocket-nodered0.1.tar dest=/home/pi/docker-images/rocket-nodered0.1.tar
+
+
+- name: load local bind image
+  docker_image:
+    name: rocket-motion
+    load_path: /home/pi/docker-images/rocket-motion0.1.tar
+
+
+- name: load local bind image
+  docker_image:
+    name: rocket-nodered
+    load_path: /home/pi/docker-images/rocket-nodered0.1.tar
+
+
+
+
+- name: start yavin pi-hole container
+  docker_container:
+    name: rocket-motion
+    image: rocket-nodered:lab
+    restart_policy: always
+    priviliged: yes
+    ports:  
+      - "8181:8081"
+      - "8180:8080"
+    env:
+      ROCKET_NAME: Rocket_21
+    volumes:
+      - /drives/platform/INFRA-SRV/yavin/volumes/pihole/etc/pihole:/etc/pihole
+
+
+
+
+
+
+#- name: load rocket-motion
+#  shell: docker load -i /gluster/data/DV/images/rocket/motion/rocket-motion.01.tar
+
+
+

@@ -1,0 +1,53 @@
+---
+
+#
+# install docker compose 
+#
+#
+#
+#
+
+- name: add docker group
+  tags: configs
+
+  group:
+    name: docker
+    gid: 1002
+    state: present
+
+
+- name: add pi to docker group
+  tags: configs
+  user:
+    name: pi
+    groups: docker
+    append: yes
+
+
+- name: Execute the command in remote shell; stdout goes to the specified file on the remote.
+  shell: curl -sSL https://get.docker.com  | sh 
+  args:
+    creates: /etc/docker/key.json
+
+
+
+- name: install docker compose
+  pip:
+    name: docker-compose
+
+- name: add new source fill 
+  copy: src=files/daemon.json dest=/etc/docker/daemon.json
+
+
+
+# Mount configuration.
+- name: Ensure the Gluster volume is mounted.
+  tags: configs
+  mount:
+    name: /drives/platform
+    src: /gluster/gvol0/LAB 
+    fstype: none
+    opts: "defaults,bind"
+    state: mounted
+
+

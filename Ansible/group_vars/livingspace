@@ -1,0 +1,10 @@
+#groups_vars
+
+hostname: livingroom-mediacenter
+#
+
+overscan_left: -7
+overscan_right: -7
+overscan_top: -22
+overscan_bottom: -22
+

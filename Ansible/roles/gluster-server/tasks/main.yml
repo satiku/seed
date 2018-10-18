@@ -1,0 +1,135 @@
+---
+
+# format drive ext4 
+# brick01 
+# volume01 
+# drive01
+#
+#
+
+- name: update apt cache
+  apt:
+    update_cache: yes
+    
+
+- name: install glusterfs-server
+  apt: 
+    name: glusterfs-server=3.7.6-1ubuntu1
+    state: present
+
+
+
+
+- name: Create a ext4 filesystem on /dev/sda1 and check disk blocks
+  filesystem:
+#    force: yes    
+    fstype: ext4
+    dev: /dev/sda1
+
+- name: Mount up device by label
+  mount:
+    name: /gluster/brick01
+    src: /dev/sda1
+    fstype: ext4
+    state: mounted
+
+
+
+- name: Creates directory
+  file: 
+    path: /gluster/brick01/gvol0  
+    state: directory
+
+- name: Start service glusterd, if not running
+  service:
+    name: glusterfs-server
+    state: started
+
+- lineinfile:
+    path: /etc/hosts
+    regexp: '^10\.3\.21\.11'
+    line : '10.3.21.11      gluster01'
+
+
+- lineinfile:
+    path: /etc/hosts
+    regexp: '^10\.3\.21\.12'
+    line : '10.3.21.12      gluster02'
+
+- lineinfile:
+    path: /etc/hosts
+    regexp: '^10\.3\.21\.13'
+    line : '10.3.21.13      gluster03'
+
+
+
+
+
+
+
+# - name: create gluster volume with multiple bricks
+#   gluster_volume:
+#     state: present
+#     name: gvol0
+#     replicas: 2
+#     bricks: /gluster/brick01/gvol0
+#     cluster:
+#       - 10.3.21.11
+#       - 10.3.21.12
+#   run_once: true
+
+
+
+#
+# gluster volume create gvol0 replica 2 gluster01:/gluster/brick01/gvol0 gluster02:/gluster/brick01/gvol0
+#    gluster volume start gvol0
+#    gluster volume info
+#
+#
+
+# sudo gluster volume add-brick gvol0 gluster03:/gluster/brick01/gvol0
+# sudo gluster volume remove-brick gvol0 gluster03:/gluster/brick01/gvol0 start 
+
+
+# sudo setfattr -n trusted.non-existent-key -v abc /gluster/gvol0/
+
+# sudo setfattr -x trusted.non-existent-key  /gluster/gvol0/
+
+
+
+
+# getfattr -d -m. -e hex /gluster/gvol0/
+
+# sudo gluster volume heal gvol0 info
+
+# sudo gluster volume replace-brick gvol0 gluster02:/gluster/brick01/gvol0 gluster03:/gluster/brick01/gvol0 commit force
+
+
+#- name: install samba
+#  apt: name=samba state=present 
+#  tags: packages
+
+# - name: install ctdb
+#   apt: name=ctdb state=present 
+#   tags: packages
+
+
+
+# - name: samba config
+#   copy: src=files/smb.conf dest=/etc/samba/smb.conf
+#   tags: configs
+#   notify: restart_smbd
+
+
+# - name: ctdb config
+#   copy: src=files/ctdb dest=/etc/sysconfig/ctdb
+#   tags: configs
+
+# - name: ctdb public_addresses config
+#   copy: src=files/public_addresses dest=/etc/ctdb/public_addresses
+#   tags: configs
+
+# - name: ctdb nodes config
+#   copy: src=files/nodes dest=/etc/ctdb/nodes
+#   tags: configs
+

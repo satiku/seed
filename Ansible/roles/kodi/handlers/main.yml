@@ -1,0 +1,14 @@
+---
+
+- name: prime-kodi
+  become: yes
+  become_user: pi
+  shell: kodi & sleep 50 && sudo pkill kodi 
+  notify: restart
+
+
+
+- name: restart
+  command: init 6
+
+

@@ -1,0 +1,67 @@
+---
+
+
+
+
+- name: update apt cache
+  apt:
+    update_cache: yes
+    
+
+- name: install glusterfs-client
+  apt: 
+    name: glusterfs-client=3.8.8-1
+    state: present
+  tags: packages
+
+
+
+
+- lineinfile:
+    dest: /etc/hosts
+    regexp: '^10\.3\.21\.11'
+    line : '10.3.21.11      gluster01'
+
+
+- lineinfile:
+    dest: /etc/hosts
+    regexp: '^10\.3\.21\.12'
+    line : '10.3.21.12      gluster02'
+
+
+
+
+# Mount configuration.
+- name: Ensure the Gluster volume is mounted.
+  tags: configs
+  mount:
+    name: /gluster/gvol0
+    src: gluster01:/gvol0 
+    fstype: glusterfs
+    opts: "defaults,_netdev,x-systemd.automount"
+    state: mounted
+
+
+
+- name: Creates directory
+  file: 
+    path: /drives/platform
+    state: directory
+
+
+- name: Creates directory
+  file: 
+    path: /drives/archive
+    state: directory
+
+
+
+# Mount configuration.
+- name: Ensure the Gluster volume is mounted.
+  tags: configs
+  mount:
+    name: /drives/archive
+    src: /gluster/gvol0/ARCHIVE 
+    fstype: none
+    opts: "defaults,bind"
+    state: mounted

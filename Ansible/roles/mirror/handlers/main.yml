@@ -1,0 +1,63 @@
+---
+
+
+- name: install mirror
+  become: yes
+  become_user: pi
+  command: npm install
+  args:
+   chdir: /home/pi/MagicMirror
+#    creates: /path/to/database
+
+
+
+
+- name: install traffic
+  become: yes
+  become_user: pi
+  command: npm install
+  args:
+   chdir: /home/pi/MagicMirror/modules/MMM-Traffic
+#    creates: /path/to/database
+
+
+
+- name: install PIR
+  become: yes
+  become_user: pi
+  command: npm install
+  args:
+   chdir: /home/pi/MagicMirror/modules/MMM-PIR-Sensor
+#    creates: /path/to/database
+
+
+
+
+- name: install redit
+  become: yes
+  become_user: pi
+  command: npm install
+  args:
+   chdir: /home/pi/MagicMirror/modules/MMM-Reddit
+#    creates: /path/to/database
+
+
+
+- name: install todoist
+  become: yes
+  become_user: pi
+  command: npm install
+  args:
+   chdir: /home/pi/MagicMirror/modules/MMM-Todoist
+#    creates: /path/to/database
+
+
+- name: auto startup
+  shell: env PATH=$PATH:/usr/bin pm2 startup systemd -u pi --hp /home/pi  &&  pm2 start ~/MagicMirror/installers/pm2_MagicMirror.json  &&  pm2 save
+
+
+
+- name: restart
+  command: init 6
+
+

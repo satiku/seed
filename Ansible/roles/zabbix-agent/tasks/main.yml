@@ -1,0 +1,6 @@
+---
+
+
+- docker_image:
+    name: zabbix-agent
+    load_path: /gluster/data/DV/images/zabbix/zabbix-agent/zabbix-agent.tar

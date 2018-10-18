@@ -1,0 +1,42 @@
+---
+
+
+
+
+- name: update apt cache
+  apt:
+    update_cache: yes
+    
+
+- name: install glusterfs-client
+  apt: 
+    name: glusterfs-client=3.8.8-1
+    state: present
+  tags: packages
+
+
+- name: Add the 802.1q module
+  modprobe:
+    name: fuse
+    state: present
+
+- name: Creates directory
+  file: 
+    path: /gluster/gvol0
+    state: directory
+
+
+
+# Mount configuration.
+- name: Ensure the Gluster volume is mounted.
+  tags: configs
+  mount:
+    name: /gluster/gvol0
+    src: gluster01:/gvol0 
+    fstype: glusterfs
+    opts: "defaults,_netdev,x-systemd.automount"
+    state: mounted
+
+
+
+ #mount -t glusterfs server1:/test-volume /mnt/glusterfs

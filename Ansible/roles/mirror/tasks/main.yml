@@ -1,0 +1,166 @@
+---
+
+
+#- name: Download latest Maggic mirror script
+#  get_url:
+#    url: https://raw.githubusercontent.com/MichMich/MagicMirror/master/installers/raspberry.sh
+#    dest: /home/pi/raspberry.sh
+#    mode: 0755
+
+
+
+- name: rotate display
+  lineinfile:
+    dest: /boot/config.txt
+    regexp: '^display_rotate'
+    line: 'display_rotate=3'
+
+
+
+
+    #
+    #
+    #- name: copy script
+    #  copy:
+    #    src: files/raspberry.sh
+    #    dest: /home/pi/raspberry.sh
+    #    owner: pi
+    #    mode: 0755
+    #
+    #
+
+    #- name: Run latest magic mirror script
+    #  command: /home/pi/raspberry.sh
+    #  become: yes
+    #  become_user: pi
+    #  args:
+    #   chdir: /home/pi
+    #   creates: /home/pi/MagicMirror/
+    #  notify: auto startup
+    #
+    #
+
+
+
+- name : pull magic mirror
+  become: yes
+  become_user: pi
+  git:
+    repo: https://github.com/MichMich/MagicMirror.git
+    dest: /home/pi/MagicMirror
+    force: yes
+  notify: install mirror
+
+
+
+
+
+
+- name : pull traffic
+  become: yes
+  become_user: pi
+  git:
+    repo: https://github.com/SamLewis0602/MMM-Traffic.git
+    dest: /home/pi/MagicMirror/modules/MMM-Traffic
+    force: yes
+  notify: install traffic
+
+
+
+- name : pull PIR
+  become: yes
+  become_user: pi
+  git:
+    repo: https://github.com/paviro/MMM-PIR-Sensor.git
+    dest: /home/pi/MagicMirror/modules/MMM-PIR-Sensor
+    force: yes
+  notify: install PIR
+
+
+- name : pull redit
+  become: yes
+  become_user: pi
+  git:
+    repo: https://github.com/kjb085/MMM-Reddit.git
+    dest: /home/pi/MagicMirror/modules/MMM-Reddit
+    force: yes
+  notify: install redit
+
+
+
+- name : pull todoist
+  become: yes
+  become_user: pi
+  git:
+    repo: https://github.com/cbrooker/MMM-Todoist
+    dest: /home/pi/MagicMirror/modules/MMM-Todoist
+    force: yes
+  notify: install todoist
+
+
+
+
+
+- name: add pi to gpio
+  user:
+    name: pi
+    group: gpio
+
+
+
+
+- name: grant cec control
+  shell: chmod u+s /opt/vc/bin/tvservice && sudo chmod u+s /bin/chvt
+
+
+
+
+
+
+
+- name: load config 
+  template:
+    src: templates/config.js.jinja
+    dest: /home/pi/MagicMirror/config/config.js
+  notify: restart
+
+
+
+- name: Install pm2
+  become: yes
+  become_user: pi
+  npm:
+    name: pm2
+    global: yes
+
+
+
+
+
+
+# - name: load 
+#   become: yes
+#   become_user: pi
+#   command: pm2 startup linux -u pi --hp /home/pi
+
+
+
+
+# - name: load 
+#   become: yes
+#   become_user: pi
+#   command: pm2 start ~/MagicMirror/installers/pm2_MagicMirror.json
+
+# - name: load 
+#   become: yes
+#   become_user: pi
+#   command: pm2 save
+
+
+
+
+#- name: copy sources.xml
+#  copy: src=files/sources.xml dest=/home/pi/.kodi/userdata/sources.xml
+
+
+
