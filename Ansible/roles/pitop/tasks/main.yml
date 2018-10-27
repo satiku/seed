@@ -29,6 +29,15 @@
     path: /home/pi/tmm
     state: directory
 
+- name: copy lightdm config for i3 
+  copy:
+    src: files/lightdm.conf
+    dest: /etc/lightdm/lightdm.conf
+    owner: root
+    group: root
+    mode: 0644
+
+
 
 
 #- name: Unarchive a file that needs to be downloaded (added in 2.0)
