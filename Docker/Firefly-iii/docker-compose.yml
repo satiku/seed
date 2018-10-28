@@ -5,16 +5,18 @@ services:
     build: web/
     ports:
       - "8082:80"
-    networks: db
+    networks: 
+      - db
   db:
     image: "arm32v7/postgres"
     restart: always
-    networks: db
+    networks: 
+      - db
     environment:
       POSTGRES_DB: firefly_db
       POSTGRES_USER: firefly_admin
       POSTGRES_PASSWORD: Password1
-    volume:
+      volumes:
       source: pgdata
       target: /var/lib/postgresql/data
 
