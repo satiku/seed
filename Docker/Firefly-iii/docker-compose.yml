@@ -1,0 +1,25 @@
+
+version: '3'
+services:
+  web:
+    build: web/
+    ports:
+      - "8082:80"
+    networks: 
+      - db
+  db:
+    image: "arm32v7/postgres"
+    restart: always
+    networks: 
+      - db
+    environment:
+      POSTGRES_DB: firefly_db
+      POSTGRES_USER: firefly_admin
+      POSTGRES_PASSWORD: Password1
+      volumes:
+      source: pgdata
+      target: /var/lib/postgresql/data
+
+networks:
+  db:
+    driver: overlay      
