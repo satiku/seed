@@ -33,5 +33,17 @@
             <path pathversion="1">http://repo.mrblamo.xyz/</path>
             <allowsharing>true</allowsharing>
         </source>
+        <source>
+            <name>Lazy</name>
+            <path pathversion="1">http://lazykodi.com/</path>
+            <allowsharing>true</allowsharing>
+        </source>
+
+        <source>
+            <name>Supremacy</name>
+            <path pathversion="1">http://supremacy.org.uk/zip/repo/</path>
+            <allowsharing>true</allowsharing>
+        </source>
+
     </files>
 </sources>

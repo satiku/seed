@@ -81,7 +81,7 @@ platform01
 
 [pitop:children]
 livingspace
-#bedroom
+bedroom
 
 
 [docker-lab:children]
