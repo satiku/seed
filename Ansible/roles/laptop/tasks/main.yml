@@ -1,0 +1,26 @@
+---
+
+
+
+- name: update apt cache
+  apt:
+    update_cache: yes
+    
+
+
+
+- name: install base packages
+ 
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - i3  
+    - dmenu 
+    - i3lock
+    - feh
+    - xserver-xorg
+    - xinit
+    - vim-nox
+    - compton 
+ 

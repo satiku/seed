@@ -1,0 +1,9 @@
+---
+- name: latop 
+  hosts: laptop
+  user: zhudson 
+  become: true
+  roles:
+    - laptop
+
+
