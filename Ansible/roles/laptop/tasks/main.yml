@@ -1,7 +1,4 @@
 ---
-
-
-
 - name: update apt cache
   apt:
     update_cache: yes
@@ -10,8 +7,8 @@
 
 
 - name: install base packages
- 
   apt:
+    update_cache: yes
     name: "{{ packages }}"
   vars:
     packages:
@@ -23,4 +20,48 @@
     - xinit
     - vim-nox
     - compton 
+    - lemonbar
+    - python-pip 
+    - fonts-powerline
+
+
+
+- name: install powerline 
+  pip: 
+    name: powerline-status
+
+
+
+- name: add config 
+  copy: 
+    src: files/bar.sh
+    dest: ~/bar.sh
+
+- name: add config 
+  copy: 
+    src: files/bg.jpg
+    dest: ~/bg.jpg
+
+
+- name: add config 
+  copy: 
+    src: files/.bashrc
+    dest: ~/.bashrc
+
+
+- name: add config 
+  copy: 
+    src: files/config
+    dest: ~/.config/i3/config
+
+
+- name: add config 
+  copy: 
+    src: files/.vimrc
+    dest: ~/.vimrc
+
+
+
+ 
+
  
