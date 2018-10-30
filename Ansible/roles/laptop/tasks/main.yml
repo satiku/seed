@@ -1,12 +1,6 @@
 ---
-- name: update apt cache
-  apt:
-    update_cache: yes
-    
-
-
-
 - name: install base packages
+  become: true 
   apt:
     update_cache: yes
     name: "{{ packages }}"
