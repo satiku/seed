@@ -19,8 +19,11 @@ font pango:monospace 8
 
 for_window [class="^.*"] border pixel 2
 
-# gaps inner 5
-# gaps outer 5
+# gaps inner 8
+# gaps outer 3
+
+#gaps inner all set 20
+#gaps outer current plus 5
 
 
 
@@ -179,7 +182,9 @@ bindsym $mod+r mode "resize"
 #        status_command i3status
 #}
 
+
 exec bash bar.sh | lemonbar -pb -F "#66ff66" 
+exec bash bar2.sh | lemonbar -pb -F "#66ff66" 
 
 exec feh --bg-fill bg.jpg 
 exec compton

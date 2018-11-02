@@ -17,7 +17,7 @@
     - lemonbar
     - python-pip 
     - fonts-powerline
-
+    - tmux
 
 
 - name: install powerline 
@@ -30,6 +30,11 @@
   copy: 
     src: files/bar.sh
     dest: ~/bar.sh
+
+- name: add config 
+  copy: 
+    src: files/bar2.sh
+    dest: ~/bar2.sh
 
 - name: add config 
   copy: 
@@ -53,6 +58,12 @@
   copy: 
     src: files/.vimrc
     dest: ~/.vimrc
+
+- name: add config 
+  copy: 
+    src: files/.tmux.conf
+    dest: ~/.tmux.conf
+
 
 
 
