@@ -18,7 +18,8 @@
     - python-pip 
     - fonts-powerline
     - tmux
-
+    - conky 
+    - luakit
 
 - name: install powerline 
   pip: 
