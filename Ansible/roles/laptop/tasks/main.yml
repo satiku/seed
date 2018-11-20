@@ -1,6 +1,7 @@
 ---
 - name: install base packages
   become: true 
+  tags: installs
   apt:
     update_cache: yes
     name: "{{ packages }}"
@@ -21,47 +22,55 @@
 
 
 - name: install powerline 
+  tags: installs
   pip: 
     name: powerline-status
 
 
 
-- name: add config 
+- name: add bar config 
+  tags: configs
   copy: 
     src: files/bar.sh
     dest: ~/bar.sh
 
-- name: add config 
+- name: add bar2 config 
+  tags: configs
   copy: 
     src: files/bar2.sh
     dest: ~/bar2.sh
 
-- name: add config 
+- name: copy background image 
+  tags: configs
   copy: 
     src: files/bg.jpg
     dest: ~/bg.jpg
 
 
-- name: add config 
+- name: add bash config 
+  tags: configs
   copy: 
     src: files/.bashrc
     dest: ~/.bashrc
 
 
-- name: add config 
+- name: add i3 config 
+  tags: configs
   copy: 
     src: files/config
     dest: ~/.config/i3/config
 
 
-- name: add config 
+- name: add vim  config 
+  tags: configs
   copy: 
     src: files/.vimrc
     dest: ~/.vimrc
 
-- name: add config 
+- name: add tmux config 
+  tags: configs
   copy: 
-    src: files/.tmux.conf
+    src: files/tmux.conf
     dest: ~/.tmux.conf
 
 

@@ -3,7 +3,7 @@
 # z3bra - (c) wtfpl 2014
 # Fetch infos on your computer, and print them to stdout every second.
 clock() {
-    date '+%Y-%m-%d %H:%M'
+    date '+%Y-%m-%d'
 }
 
 battery() {
@@ -13,6 +13,14 @@ battery() {
     echo `cat $BATS` " : " `cat $BATC`
 
 
+}
+
+conky_battery(){
+	conky -i 1 --text='$battery $battery_bar'
+}
+
+conky_disk(){
+	conky -i 1 --text='$fs_bar $fs_used_perc%'
 }
 
 volume() {
@@ -78,8 +86,7 @@ groups() {
 
 # This loop will fill a buffer with our infos, and output it to stdout.
 while :; do
-    buf="!!   "
-    buf="${buf} [$(groups)]  "   
+    buf="! "
     buf="${buf} VOL: $(volume) "
 
     buf="${buf} %{c} $(clock)"
@@ -87,12 +94,9 @@ while :; do
 #    buf="${buf} %{r} NET: $(network) | "
 
 
-    buf="${buf} %{r} $(net) | "
-    buf="${buf}  $(wifi) | "
-    buf="${buf} CPU: $(cpuload)% | "
-    buf="${buf} RAM: $(memused)% | "
-    buf="${buf} DISK: $(disk) | "
-    buf="${buf} BAT: $(battery)%"
+    buf="${buf} %{r} $(wifi) | "
+    buf="${buf} DISK: $(conky_disk) | "
+    buf="${buf} BAT: $(conky_battery)"
 
     echo $buf
     # use `nowplaying scroll` to get a scrolling output!

@@ -4,7 +4,7 @@
 # Fetch infos on your computer, and print them to stdout every second.
 
 clock() {
-    date '+%Y-%m-%d %H:%M'
+    date '+%H:%M'
 }
 
 battery() {
@@ -23,6 +23,14 @@ volume() {
 cpuload() {
     LINE=`ps -eo pcpu |grep -vE '^\s*(0.0|%CPU)' |sed -n '1h;$!H;$g;s/\n/ +/gp'`
     bc <<< $LINE
+}
+
+conky_cpu(){
+	conky -i 1 --text='$cpubar $cpu%'
+}
+
+conky_mem(){
+	conky -i 1 --text='$membar $memperc%'
 }
 
 memused() {
@@ -81,7 +89,6 @@ groups() {
 while :; do
     buf="   "
     buf="${buf} [$(groups)]  "   
-    buf="${buf} VOL: $(volume) "
 
     buf="${buf} %{c} $(clock)"
     
@@ -89,11 +96,8 @@ while :; do
 
 
     buf="${buf} %{r} $(net) | "
-    buf="${buf}  $(wifi) | "
-    buf="${buf} CPU: $(cpuload)% | "
-    buf="${buf} RAM: $(memused)% | "
-    buf="${buf} DISK: $(disk) | "
-    buf="${buf} BAT: $(battery)%"
+    buf="${buf} CPU: $(conky_cpu) | "
+    buf="${buf} RAM: $(conky_mem) | "
 
     echo $buf
     # use `nowplaying scroll` to get a scrolling output!
