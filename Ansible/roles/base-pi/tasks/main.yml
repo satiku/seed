@@ -44,10 +44,10 @@
     mode: 0777
 
 
-- name: check line in file
-  lineinfile:
-    dest: /etc/rc.local
-    regexp: '^/usr/bin/zram.sh'
-    line : '/usr/bin/zram.sh &'
-    insertbefore: 'exit 0'
+#- name: check line in file
+#  lineinfile:
+#    dest: /etc/rc.local
+#    regexp: '^/usr/bin/zram.sh'
+#    line : '/usr/bin/zram.sh &'
+#    insertbefore: 'exit 0'
 

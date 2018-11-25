@@ -1,0 +1,13 @@
+---
+- name: pitop
+  hosts: localhost
+  user: pi
+  become: true
+  roles:
+    - pitop
+    - kodi
+    - base-pi
+
+
+
+

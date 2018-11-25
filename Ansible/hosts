@@ -4,6 +4,9 @@
 [laptop]
 127.0.0.1
 
+[localhost]
+127.0.0.1
+
 [INFRA-SRV1]
 10.3.11.10
 
