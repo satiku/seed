@@ -87,7 +87,7 @@
   roles:
     - base-pi
     - mirror
-    - gluster-client-PI
+#    - gluster-client-PI
 
 
 

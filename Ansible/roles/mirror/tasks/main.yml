@@ -15,41 +15,45 @@
     regexp: '^display_rotate'
     line: 'display_rotate=3'
 
+- name: install npm 
+  apt:
+    update_cache: yes 
+    name: nodejs
+    state: present 
 
 
 
-    #
-    #
-    #- name: copy script
-    #  copy:
-    #    src: files/raspberry.sh
-    #    dest: /home/pi/raspberry.sh
-    #    owner: pi
-    #    mode: 0755
-    #
-    #
 
-    #- name: Run latest magic mirror script
-    #  command: /home/pi/raspberry.sh
-    #  become: yes
-    #  become_user: pi
-    #  args:
-    #   chdir: /home/pi
-    #   creates: /home/pi/MagicMirror/
-    #  notify: auto startup
-    #
-    #
+- name: copy script
+  copy:
+    src: files/raspberry.sh
+    dest: /home/pi/raspberry.sh
+    owner: pi
+    mode: 0755
 
 
 
-- name : pull magic mirror
+- name: Run latest magic mirror script
+  command: /home/pi/raspberry.sh
   become: yes
   become_user: pi
-  git:
-    repo: https://github.com/MichMich/MagicMirror.git
-    dest: /home/pi/MagicMirror
-    force: yes
-  notify: install mirror
+  args:
+   chdir: /home/pi
+   creates: /home/pi/MagicMirror/
+  notify: auto startup
+
+
+
+
+
+#- name : pull magic mirror
+#  become: yes
+#  become_user: pi
+#  git:
+#    repo: https://github.com/MichMich/MagicMirror.git
+#    dest: /home/pi/MagicMirror
+#    force: yes
+#  notify: install mirror
 
 
 
@@ -127,8 +131,8 @@
 
 
 - name: Install pm2
-  become: yes
-  become_user: pi
+#  become: yes
+#  become_user: pi
   npm:
     name: pm2
     global: yes

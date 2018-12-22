@@ -94,65 +94,15 @@ var config = {
 			}
 		},
 		{
-			module: "newsfeed",
-			position: "bottom_bar",
-			config: {
-				feeds: [
-					{
-						title: "New York Times",
-						url: "http://www.nytimes.com/services/xml/rss/nyt/HomePage.xml"
-					}
-				],
-				showSourceTitle: false,
-				showPublishDate: true
-			}
-		},
-		{
 			module: 'MMM-Traffic',
 			position: 'top_left',
 			classes: 'dimmed medium', //optional, default is 'bright medium', only applies to commute info not route_name
 			config: {
 				api_key: '{{  google_api  }}',
 				mode: 'driving',
-				origin: '1 Valley View Drive, Cranston, RI 02921',
+				origin: '47 Messer Street, Providence, RI 02909',
 				destination: '55 Technology Way,  West Greenwich, RI 02817',
 				route_name: 'Home to Work',
-				changeColor: true,
-				showGreen: false,
-				limitYellow: 10, //Greater than 5% of journey time due to traffic
-				limitRed: 20, //Greater than 20% of journey time due to traffic
-				traffic_model: 'pessimistic',
-				interval: 120000 //2 minutes
-			}
-		},
-		{
-			module: 'MMM-Traffic',
-			position: 'top_left',
-			classes: 'dimmed medium', //optional, default is 'bright medium', only applies to commute info not route_name
-			config: {
-				api_key: '{{  google_api  }}',
-				mode: 'driving',
-				origin: '1 Valley View Drive, Cranston, RI 02921',
-				destination: '1174 Kingstown Rd, South Kingstown, RI 02879',
-				route_name: 'Home to RSC SK',
-				changeColor: true,
-				showGreen: false,
-				limitYellow: 10, //Greater than 5% of journey time due to traffic
-				limitRed: 20, //Greater than 20% of journey time due to traffic
-				traffic_model: 'pessimistic',
-				interval: 120000 //2 minutes
-			}
-		},
-		{
-			module: 'MMM-Traffic',
-			position: 'top_left',
-			classes: 'dimmed medium', //optional, default is 'bright medium', only applies to commute info not route_name
-			config: {
-				api_key: '{{  google_api  }}',
-				mode: 'driving',
-				origin: '1 Valley View Drive, Cranston, RI 02921',
-				destination: '100 Higginson Ave, Lincoln, RI 02865',
-				route_name: 'Home to RSC L',
 				changeColor: true,
 				showGreen: false,
 				limitYellow: 10, //Greater than 5% of journey time due to traffic
@@ -167,8 +117,8 @@ var config = {
 			config: {
 		    		subreddit: ['raspberry_pi', 'science', 'linux'],
 					displayType: 'headlines',
-					count: 24,
-					show: 8,
+					count: 16,
+					show: 4,
 					width: 700,
 					showSubreddit: true,
 					colorText: false,
