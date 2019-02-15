@@ -60,11 +60,12 @@
     - INFRA-SRV-yavin
 
 
-- name: INFRA-SRV-Hoth
+- name: INFRA-SRV Hoth
   hosts: INFRA-SRV2
-  user: solo
+  user: pi
   become: true
   roles:
+    - base-pi
 #    - gluster-client-BPI
     - docker-host-PI
 
