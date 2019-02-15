@@ -25,7 +25,7 @@
     - adminutl
     - base-pi
     - tshoot
-
+    - docker-host-PI
 
 
 - name: pitop
@@ -60,13 +60,13 @@
     - INFRA-SRV-yavin
 
 
-- name: INFRA-SRV-Endor
+- name: INFRA-SRV-Hoth
   hosts: INFRA-SRV2
   user: solo
   become: true
   roles:
 #    - gluster-client-BPI
-    - docker-host-BPI
+    - docker-host-PI
 
 
 
