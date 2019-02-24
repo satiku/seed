@@ -1,0 +1,49 @@
+
+version: '3.2'
+services:
+  tor:
+    build: ../../Tor/tor/
+    image: tor
+    ports:
+            - "9050:9050"
+    networks:
+        net1:
+                ipv4_address: 10.5.10.24
+
+  ddclient:
+    build: ../../DDClient/ddclient
+    image: ddclient
+    volumes:
+      - /home/pi/locals/ddclient/ddclient.conf:/etc/ddclient.conf
+
+    
+
+
+
+  pihole:
+    image: diginc/pi-hole-multiarch:debian_armhf
+    cap_add: 
+        - NET_ADMIN
+    ports:  
+      - "53:53/udp"
+      - "53:53/tcp"
+      - "80:80"
+    networks:
+        net1:
+                 ipv4_address: 10.5.10.21
+    environment:
+      ServerIP: 10.5.10.21
+      DNS1: 1.1.1.1
+      DNS2: 8.8.8.8
+      WEBPASSWORD: Password1
+
+
+
+networks:
+  net1:
+    driver: macvlan
+    driver_opts:
+            parent: eth0
+    ipam:
+      config:
+        - subnet: 10.5.10.0/24
