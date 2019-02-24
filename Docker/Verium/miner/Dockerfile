@@ -3,7 +3,7 @@ FROM arm32v7/ubuntu:bionic
 
 
 RUN apt-get update && apt-get upgrade -y 
-RUN apt-get install git automake autoconf pkg-config libcurl4-openssl-dev libjansson-dev libssl-dev libgmp-dev binutils  build-essential zlib1g-dev -y  
+RUN apt-get install git automake autoconf pkg-config libcurl4-openssl-dev libjansson-dev libssl-dev libgmp-dev zlib1g-dev -y  
 
 RUN mkdir ~/verium
 RUN git clone https://github.com/effectsToCause/veriumMiner ~/verium/miner

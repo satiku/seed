@@ -1,0 +1,10 @@
+
+version: '3.2'
+services:
+  verium-miner:
+    build: miner/
+    image: verium-miner
+    deploy: 
+      replicas: 2
+
+
