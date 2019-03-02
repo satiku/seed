@@ -1,0 +1,37 @@
+
+version: '3.2'
+services:
+  haproxy:
+#    image: arm32v7/haproxy:1.9.4
+    image: haproxy
+    build: ../../HAProxy/haproxy/
+    networks:
+      - haproxy-jellyfin
+    ports:  
+      - "8096:8096"
+
+#    volume:
+#      -  /media/archive/gv0/docker_volumes/haproxy/:/usr/local/etc/haproxy 
+
+
+  jellyfin:
+    image: jellyfin/jellyfin:10.2.1-arm
+    networks:
+      - haproxy-jellyfin
+    volumes:
+      -  /media/archive/gv0/docker_volumes/jellyfin/config:/config 
+      -  /media/archive/gv0/docker_volumes/jellyfin/cache:/cache 
+      -  /media/archive/gv0/Archive01/Videos/:/mnt/library
+#    ports:  
+#      - "8096:8096"
+
+
+
+
+
+
+networks:
+  haproxy-jellyfin:
+    driver: overlay
+    attachable: true
+
