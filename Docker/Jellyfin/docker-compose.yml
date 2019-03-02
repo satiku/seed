@@ -1,0 +1,11 @@
+
+version: '3.2'
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:10.2.1-arm
+    volumes:
+      -  /media/archive/gv0/docker_volumes/jellyfin/config:/config 
+      -  /media/archive/gv0/docker_volumes/jellyfin/cache:/cache 
+      -  /media/archive/gv0/Archive01/Videos/:/mnt/library
+    ports:  
+      - "8096:8096"
