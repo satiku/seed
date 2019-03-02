@@ -1,17 +1,30 @@
 
 version: '3.2'
 services:
+
+  varnish:
+    image: varnish
+    build: ../../Varnish/varnish/
+    networks:
+      - varnish-haproxy
+    depends_on:
+      - haproxy
+    ports:  
+      - "8096:8096"
+      - "6082:6082"
+    command: [ "varnishd", "-F", "-a", ":8096", "-T", ":6082", "-b", "haproxy:8096",  "-s", "malloc,512M" ]
+
   haproxy:
 #    image: arm32v7/haproxy:1.9.4
     image: haproxy
     build: ../../HAProxy/haproxy/
     networks:
+      - varnish-haproxy
       - haproxy-jellyfin
     depends_on:
       - jellyfin
-    ports:  
-      - "8096:8096"
-
+#    ports:  
+#      - "8096:8096"
 #    volume:
 #      -  /media/archive/gv0/docker_volumes/haproxy/:/usr/local/etc/haproxy 
 
@@ -34,6 +47,9 @@ services:
 
 networks:
   haproxy-jellyfin:
+    driver: overlay
+    attachable: true
+  varnish-haproxy:
     driver: overlay
     attachable: true
 
