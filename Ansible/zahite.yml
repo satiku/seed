@@ -8,6 +8,16 @@
       - docker-host-XU4
 
 
+-   name: build odroid lab
+    hosts: odroid-lab
+    user: solo
+    become: true
+    roles:
+      - docker-host-XU4
+
+
+
+
 # -   name: setup docker hosts
 #     hosts: platform
 #     user: solo
@@ -43,9 +53,16 @@
   user: pi
   become: true
   roles:
-    - gluster-client-PI
+#    - gluster-client-PI
     - docker-host-PI
 
+
+- name: Verium PI Miners
+  hosts: pi-miners
+  user: pi
+  become: true
+  roles:
+    - docker-host-PI
 
 
 
@@ -100,12 +117,11 @@
 #    - haproxy
 
 
-- name: Edge swarm
-  hosts: edge01
+- name: Verium Miner
+  hosts: miner11
   user: solo
   become: true
   roles:
-    - gluster-client-BPI
     - docker-host-BPI
 
 

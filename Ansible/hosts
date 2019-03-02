@@ -14,15 +14,20 @@
 10.5.11.10
 
 [livingspace]
-10.3.10.119
+10.5.10.107
 
 [bedroom]
 10.5.10.100
 
-[mirror]
+
+[miner11]
+10.5.20.105
+
+[lab1]
+10.5.10.20
+
+[odroid-lab]
 10.5.10.109
-
-
 
 [platform01]
 10.3.21.11
@@ -89,14 +94,15 @@ bedroom
 
 
 [docker-lab:children]
-livingspace
+lab1
 #bedroom
 
-
+[pi-miners:children]
+livingspace
 
 
 [rockets:children]
 rocket00
 #rocket01
 rocket11
-#rocket02
+rocket02
