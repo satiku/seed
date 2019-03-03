@@ -31,6 +31,7 @@ services:
 
   jellyfin:
     image: jellyfin/jellyfin:10.2.1-arm
+    restart: always
     networks:
       - haproxy-jellyfin
     volumes:
