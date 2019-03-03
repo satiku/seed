@@ -1,0 +1,40 @@
+
+version: '3.2'
+services:
+  deluge:
+    build: deluge/
+    image: deluge
+    volumes:
+      - type: volume
+        source: deluge-volume
+        target: /mnt
+        volume:
+          nocopy: true
+
+    ports:  
+      - "58846:58846"
+    networks: 
+      - deluge-tor
+  
+  tor:
+    build: ../Tor/tor
+    image: tor
+    ports:
+        - "9050:9050"
+    networks:
+        - deluge-tor
+
+
+volumes:
+  deluge-volume:
+    driver_opts:
+      type: "nfs"
+      o: "addr=10.5.11.20,nolock,soft,rw"
+      device: ":/export/Volumes/pi-lab/deluge"
+
+
+
+networks:
+  deluge-tor:
+    driver: overlay
+    attachable: true
