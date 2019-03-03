@@ -35,12 +35,45 @@ services:
     networks:
       - haproxy-jellyfin
     volumes:
-      -  /media/archive/gv0/docker_volumes/jellyfin/config:/config 
-      -  /media/archive/gv0/docker_volumes/jellyfin/cache:/cache 
-      -  /media/archive/gv0/Archive01/Videos/:/mnt/library
+      - type: volume
+        source: archive-volume
+        target: /mnt/library
+        volume:
+          nocopy: true
+      - type: volume
+        source: jellyfin-config-volume
+        target: /config
+        volume:
+          nocopy: true
+      - type: volume
+        source: jellyfin-cache-volume
+        target: /cache
+        volume:
+          nocopy: true
+
 #    ports:  
 #      - "8096:8096"
 
+
+
+
+
+volumes:
+  archive-volume:
+    driver_opts:
+      type: "nfs"
+      o: "addr=10.5.11.20,nolock,soft,rw"
+      device: ":/export/Archive"
+  jellyfin-config-volume:
+    driver_opts:
+      type: "nfs"
+      o: "addr=10.5.11.20,nolock,soft,rw"
+      device: ":/export/Volumes/$HOST/WEB-NEXUS-HOTH/config"
+  jellyfin-cache-volume:
+    driver_opts:
+      type: "nfs"
+      o: "addr=10.5.11.20,nolock,soft,rw"
+      device: ":/export/Volumes/$HOST/WEB-NEXUS-HOTH/cache"
 
 
 
