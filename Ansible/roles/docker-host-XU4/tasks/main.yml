@@ -52,15 +52,10 @@
     state: present
 
 
-- name: update apt cache
-  apt:
-    update_cache: yes
-    
-
-
 - name: install docker-ce
   apt: 
-    name: docker-ce=18.03.1~ce-0~ubuntu
+    name: docker-ce=18.03.1~ce-0~ubuntu 
+    update_cache: yes
     state: present
   tags: packages
 
@@ -85,6 +80,8 @@
 
 
 - name: install docker compose
+  become: yes
+  become_user: solo
   pip:
     name: docker-compose
 
