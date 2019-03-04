@@ -1,0 +1,91 @@
+
+version: '3.2'
+services:
+  radarr:
+    image: linuxserver/radarr:arm32v6-latest
+    environment:
+#       - PUID=0
+#       - PGID=0
+       - TZ=US/Eastern
+    volumes:
+      - type: volume
+        source: radar-volume
+        target: /config
+        volume:
+          nocopy: true
+      - type: volume
+        source: movies-completed-volume
+        target: /downloads
+        volume:
+          nocopy: true
+      - type: volume
+        source: archive-movies-volume
+        target: /movies
+        volume:
+          nocopy: true
+    ports:  
+      - "7878:7878"
+    networks: 
+      - radarr-tor
+      - radarr-deluge
+  deluge:
+    build: ../Deluge/deluge/
+    image: deluge
+    volumes:
+      - type: volume
+        source: deluge-volume
+        target: /mnt
+        volume:
+          nocopy: true
+
+    ports:
+      - "58846:58846"
+    networks:
+      - deluge-tor
+      - radarr-deluge
+
+
+
+
+  tor:
+    build: ../Tor/tor
+    image: tor
+    ports:
+        - "9050:9050"
+    networks:
+        - radarr-tor
+        - deluge-tor
+
+volumes:
+  deluge-volume:
+    driver_opts:
+      type: "nfs"
+      o: "addr=10.5.11.20,nolock,soft,rw"
+      device: ":/export/Volumes/$HOST/deluge"
+  radar-volume:
+    driver_opts:
+      type: "nfs"
+      o: "addr=10.5.11.20,nolock,soft,rw"
+      device: ":/export/Volumes/$HOST/radarr"
+  movies-completed-volume:
+    driver_opts:
+      type: "nfs"
+      o: "addr=10.5.11.20,nolock,soft,rw"
+      device: ":/export/Volumes/$HOST/deluge/movies/completed"
+  archive-movies-volume:
+    driver_opts:
+      type: "nfs"
+      o: "addr=10.5.11.20,nolock,soft,rw"
+      device: ":/export/Archive/Videos/Movies"
+
+
+networks:
+  radarr-tor:
+    driver: overlay
+    attachable: true
+  radarr-deluge:
+    driver: overlay
+    attachable: true
+  deluge-tor:
+    driver: overlay
+    attachable: true
