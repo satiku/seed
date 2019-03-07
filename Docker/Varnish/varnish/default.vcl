@@ -6,5 +6,5 @@ backend default {
 }
 
 sub vcl_backend_response {
-  set beresp.ttl = 60m;
+  set beresp.ttl = 6h;
 }
