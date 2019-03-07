@@ -12,7 +12,7 @@ services:
     ports:  
       - "8096:8096"
       - "6082:6082"
-    command: [ "varnishd", "-F", "-a", ":8096", "-T", ":6082", "-b", "haproxy:8096",  "-s", "malloc,512M" ]
+#    command: [ "varnishd", "-F", "-a", ":8096", "-T", ":6082", "-b", "haproxy:8096",  "-s", "malloc,512M" ]
 
   haproxy:
 #    image: arm32v7/haproxy:1.9.4

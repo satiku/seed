@@ -1,4 +1,10 @@
-ckend default {
+vcl 4.0;
+
+backend default {
     .host = "haproxy";
-    .port = "80";
+    .port = "8096";
+}
+
+sub vcl_backend_response {
+  set beresp.ttl = 60m;
 }
