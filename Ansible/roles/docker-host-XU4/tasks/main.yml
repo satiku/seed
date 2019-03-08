@@ -77,6 +77,12 @@
 #     creates: /etc/docker/key.json
 
 
+- name: add docker registry 
+  copy:  
+    src: files/daemon.json 
+    dest: /etc/docker/daemon.json
+
+
 
 
 - name: install docker compose
