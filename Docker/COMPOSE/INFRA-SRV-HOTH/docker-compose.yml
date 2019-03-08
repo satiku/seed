@@ -16,7 +16,19 @@ services:
     volumes:
       - /home/pi/locals/ddclient/ddclient.conf:/etc/ddclient.conf
 
-    
+  registry:
+    image: arm32v6/registry:2.7.1 
+    ports:
+            - "5000:5000"
+    networks:
+        net1:
+                ipv4_address: 10.5.11.12
+    volumes:
+      - type: volume
+        source: registry-volume
+        target: /var/lib/registry
+        volume:
+          nocopy: true
 
 
 
@@ -37,6 +49,12 @@ services:
       DNS2: 8.8.8.8
       WEBPASSWORD: Password1
 
+volumes:
+  registry-volume:
+    driver_opts:
+      type: "nfs"
+      o: "addr=10.5.11.20,nolock,soft,rw"
+      device: ":/export/Volumes/$HOST/INFRA-SRV-HOTH/registry"
 
 
 networks:
