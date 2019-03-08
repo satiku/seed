@@ -16,7 +16,7 @@ services:
     volumes:
       - /home/pi/locals/ddclient/ddclient.conf:/etc/ddclient.conf
 
-  registry
+  registry:
     image: arm32v6/registry:2.7.1 
     networks:
         net1:
