@@ -1,0 +1,14 @@
+---
+
+#- name: set hostname
+#use templates
+#
+
+
+
+- name : pull zahite-seed
+  become: yes
+  become_user: solo
+  git:
+    repo: https://github.com/satiku/seed
+    dest: /home/solo/zahite-seed
