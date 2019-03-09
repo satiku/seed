@@ -12,3 +12,11 @@
   git:
     repo: https://github.com/satiku/seed
     dest: /home/solo/zahite-seed
+
+
+- lineinfile:
+        create: yes 
+        dest: /home/solo/zahite-seed/Docker/COMPOSE/WEB-NEXUS-HOTH/.env
+        regexp: '^HOST=DEV1'
+        line : 'HOST=DEV1'
+
