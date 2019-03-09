@@ -3,7 +3,7 @@ version: '3.2'
 services:
 
   varnish:
-    image: varnish
+    image: 10.5.11.12:5000/varnish
     build: ../../Varnish/varnish/
     networks:
       - varnish-haproxy
