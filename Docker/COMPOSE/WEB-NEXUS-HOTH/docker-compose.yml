@@ -81,12 +81,12 @@ volumes:
     driver_opts:
       type: "nfs"
       o: "addr=10.5.11.20,nolock,soft,rw"
-      device: ":/export/Volumes/$HOST/WEB-NEXUS-HOTH/jellyfin/config"
+      device: ":/export/Volumes/DEV1/WEB-NEXUS-HOTH/jellyfin/config"
   jellyfin-cache-volume:
     driver_opts:
       type: "nfs"
       o: "addr=10.5.11.20,nolock,soft,rw"
-      device: ":/export/Volumes/$HOST/WEB-NEXUS-HOTH/jellyfin/cache"
+      device: ":/export/Volumes/DEV1/WEB-NEXUS-HOTH/jellyfin/cache"
 
 
 
