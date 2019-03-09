@@ -56,6 +56,12 @@
 #    - gluster-client-PI
     - docker-host-PI
 
+- name: DEV1 Cluster
+  hosts: DEV1
+  user: solo
+  become: true
+  roles:
+    - docker-host-XU4
 
 - name: Verium PI Miners
   hosts: pi-miners

@@ -20,6 +20,13 @@
 10.5.10.100
 
 
+
+[DEV1-FRONT]
+10.5.20.31
+
+[DEV1-BACK]
+10.5.20.32
+
 [miner11]
 10.5.20.105
 
@@ -80,7 +87,9 @@ INFRA-SRV2
 platform01
 platform03
 
-
+[DEV1:children]
+DEV1-FRONT
+DEV1-BACK
 
 
 [platform:children]
