@@ -3,7 +3,7 @@ version: '3.2'
 services:
 
   varnish:
-    image: varnish
+    image: 10.5.11.12:5000/varnish
     build: ../../Varnish/varnish/
     networks:
       - varnish-haproxy
@@ -12,17 +12,26 @@ services:
     ports:  
       - "8096:8096"
       - "6082:6082"
+    deploy:
+      placement:
+        constraints:
+          - node.labels.type == front
+
 #    command: [ "varnishd", "-F", "-a", ":8096", "-T", ":6082", "-b", "haproxy:8096",  "-s", "malloc,512M" ]
 
   haproxy:
 #    image: arm32v7/haproxy:1.9.4
-    image: haproxy
+    image: 10.5.11.12:5000/haproxy
     build: ../../HAProxy/haproxy/
     networks:
       - varnish-haproxy
       - haproxy-jellyfin
     depends_on:
       - jellyfin
+    deploy:
+      placement:
+        constraints:
+          - node.labels.type == front
 #    ports:  
 #      - "8096:8096"
 #    volume:
@@ -32,6 +41,10 @@ services:
   jellyfin:
     image: jellyfin/jellyfin:10.2.1-arm
     restart: always
+    deploy:
+      placement:
+        constraints:
+          - node.labels.type == back
     networks:
       - haproxy-jellyfin
     volumes:
@@ -68,12 +81,12 @@ volumes:
     driver_opts:
       type: "nfs"
       o: "addr=10.5.11.20,nolock,soft,rw"
-      device: ":/export/Volumes/$HOST/WEB-NEXUS-HOTH/jellyfin/config"
+      device: ":/export/Volumes/DEV1/WEB-NEXUS-HOTH/jellyfin/config"
   jellyfin-cache-volume:
     driver_opts:
       type: "nfs"
       o: "addr=10.5.11.20,nolock,soft,rw"
-      device: ":/export/Volumes/$HOST/WEB-NEXUS-HOTH/jellyfin/cache"
+      device: ":/export/Volumes/DEV1/WEB-NEXUS-HOTH/jellyfin/cache"
 
 
 

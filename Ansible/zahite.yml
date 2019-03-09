@@ -62,6 +62,7 @@
   become: true
   roles:
     - docker-host-XU4
+    - DEV1
 
 - name: Verium PI Miners
   hosts: pi-miners
