@@ -12,6 +12,9 @@ services:
     ports:  
       - "8096:8096"
       - "6082:6082"
+    constraints:
+      - node.labels.type == front
+
 #    command: [ "varnishd", "-F", "-a", ":8096", "-T", ":6082", "-b", "haproxy:8096",  "-s", "malloc,512M" ]
 
   haproxy:
@@ -23,6 +26,8 @@ services:
       - haproxy-jellyfin
     depends_on:
       - jellyfin
+    constraints:
+      - node.labels.type == front
 #    ports:  
 #      - "8096:8096"
 #    volume:
@@ -32,6 +37,8 @@ services:
   jellyfin:
     image: jellyfin/jellyfin:10.2.1-arm
     restart: always
+    constraints:
+      - node.labels.type == back
     networks:
       - haproxy-jellyfin
     volumes:
