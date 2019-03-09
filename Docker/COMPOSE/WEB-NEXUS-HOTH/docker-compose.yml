@@ -21,7 +21,7 @@ services:
 
   haproxy:
 #    image: arm32v7/haproxy:1.9.4
-    image: haproxy
+    image: 10.5.11.12:5000/haproxy
     build: ../../HAProxy/haproxy/
     networks:
       - varnish-haproxy
