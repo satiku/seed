@@ -7,5 +7,6 @@ RUN dpkg -i zabbix-release_4.0-2+stretch_all.deb
 
 RUN apt-get update ; apt-get install zabbix-frontend-php -y
 
+ADD zabbix.conf /etc/apache2/conf-enabled/zabbix.conf
 
 CMD [ "apachectl", "-DFOREGROUND"] 
