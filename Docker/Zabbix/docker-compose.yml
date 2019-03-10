@@ -23,6 +23,14 @@ services:
       POSTGRES_PASSWORD: password  
       PGDATA: /var/lib/postgresql/data
 
+  zabbix:
+    image: 10.5.11.12:5000/zabbix-aio
+    build: zabbix-aio
+    networks:
+      - db 
+    ports:
+      - 80:80
+      
 volumes:
   zabbix-init-volume:
     driver_opts:

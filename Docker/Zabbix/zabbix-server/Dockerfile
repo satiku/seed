@@ -5,4 +5,11 @@ COPY zabbix-release_4.0-2+stretch_all.deb  zabbix-release_4.0-2+stretch_all.deb
 
 RUN dpkg -i zabbix-release_4.0-2+stretch_all.deb
 
-RUN apt-get update ; apt-get install zabbix-server-pgsql -y 
+RUN apt-get update ; apt-get install zabbix-server-pgsql -y
+
+
+RUN mkdir /run/zabbix
+
+ADD zabbix_server.conf /etc/zabbix/zabbix_server.conf
+
+CMD ["zabbix_server","-f"] 
