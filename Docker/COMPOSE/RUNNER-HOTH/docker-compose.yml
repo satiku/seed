@@ -4,12 +4,12 @@ services:
   radarr:
     image: linuxserver/radarr:arm32v6-latest
     environment:
-#       - PUID=0
-#       - PGID=0
+       - PUID=100
+       - PGID=4096
        - TZ=US/Eastern
     volumes:
       - type: volume
-        source: radar-volume
+        source: radarr-volume
         target: /config
         volume:
           nocopy: true
@@ -32,8 +32,8 @@ services:
   sonarr:
     image: linuxserver/sonarr:arm32v6-latest
     environment:
-#       - PUID=0
-#       - PGID=0
+       - PUID=100
+       - PGID=4096
        - TZ=US/Eastern
     volumes:
       - type: volume
@@ -58,8 +58,8 @@ services:
       - sonarr-deluge
       - sonarr-jackett
   deluge:
-    build: ../Deluge/deluge/
-    image: deluge
+    build: ../../Deluge/deluge/
+    image: 10.5.11.12:5000/deluge
     volumes:
       - type: volume
         source: deluge-volume
@@ -85,47 +85,49 @@ services:
       - 9117:9117    
     networks:
       - radarr-jackett
-  
+      - sonarr-jackett
+      - jackett-tor
   tor:
-    build: ../Tor/tor
-    image: tor
+    build: ../../Tor/tor
+    image: 10.5.11.12:5000/tor
     ports:
         - "9050:9050"
     networks:
         - radarr-tor
+        - sonarr-tor
         - deluge-tor
-
+        - jackett-tor
 volumes:
   deluge-volume:
     driver_opts:
       type: "nfs"
       o: "addr=10.5.11.20,nolock,soft,rw"
-      device: ":/export/Volumes/$HOST/deluge"
-  radar-volume:
+      device: ":/export/Volumes/$HOST/RUNNER-HOTH/deluge"
+  radarr-volume:
     driver_opts:
       type: "nfs"
       o: "addr=10.5.11.20,nolock,soft,rw"
-      device: ":/export/Volumes/$HOST/radarr"
+      device: ":/export/Volumes/$HOST/RUNNER-HOTH/radarr"
   movies-completed-volume:
     driver_opts:
       type: "nfs"
       o: "addr=10.5.11.20,nolock,soft,rw"
-      device: ":/export/Volumes/$HOST/deluge/movies"
+      device: ":/export/Volumes/$HOST/RUNNER-HOTH/deluge/movies"
   sonarr-volume:
     driver_opts:
       type: "nfs"
       o: "addr=10.5.11.20,nolock,soft,rw"
-      device: ":/export/Volumes/$HOST/sonarr"
+      device: ":/export/Volumes/$HOST/RUNNER-HOTH/sonarr"
   shows-downloads-volume:
     driver_opts:
       type: "nfs"
       o: "addr=10.5.11.20,nolock,soft,rw"
-      device: ":/export/Volumes/$HOST/deluge/shows"
+      device: ":/export/Volumes/$HOST/RUNNER-HOTH/deluge/shows"
   jackett-volume:
     driver_opts:
       type: "nfs"
       o: "addr=10.5.11.20,nolock,soft,rw"
-      device: ":/export/Volumes/$HOST/jackett/"
+      device: ":/export/Volumes/$HOST/RUNNER-HOTH/jackett/"
   archive-movies-volume:
     driver_opts:
       type: "nfs"
@@ -158,5 +160,8 @@ networks:
     driver: overlay
     attachable: true
   deluge-tor:
+    driver: overlay
+    attachable: true
+  jackett-tor:
     driver: overlay
     attachable: true
