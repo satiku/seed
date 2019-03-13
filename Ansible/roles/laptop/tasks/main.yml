@@ -22,6 +22,8 @@
     - conky 
     - luakit
     - zsh
+    - fonts-font-awesome
+
 
 - name: change shell to zsh
   lineinfile:
