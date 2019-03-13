@@ -26,6 +26,7 @@
 
 
 - name: change shell to zsh
+  become: yes
   lineinfile:
         create: yes
         dest: /etc/passwd
