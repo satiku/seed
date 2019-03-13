@@ -30,6 +30,17 @@
         regexp: '^zhudson'
         line : 'zhudson:x:1000:1000:zhudson,,,:/home/zhudson:/usr/bin/zsh'
 
+
+
+- name : bumblebee repo
+  become: yes
+  become_user: zhudson
+  git:
+    repo: git://github.com/tobi-wan-kenobi/bumblebee-status
+    dest: /home/zhudson/.bumblebee-status 
+
+
+
 - name: install oh-my-zsh
   shell: sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
   args:
@@ -41,6 +52,18 @@
   pip: 
     name: powerline-status
 
+
+- name: install powerline 
+  tags: installs
+  pip: 
+    name: "{{  modules  }}"
+  vars:
+    modules:
+     - psutil
+     - netifaces
+     - requests
+     - power 
+     - i3ipc
 
 
 - name: add bar config 
