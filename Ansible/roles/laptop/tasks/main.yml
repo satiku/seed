@@ -50,6 +50,23 @@
     chdir: /home/zhudson
     creates: /home/zhudson/.oh-my-zsh/README.md
 
+- name : zsh powerlevel 9k repo
+  become: yes
+  become_user: zhudson
+  git:
+    repo: https://github.com/bhilburn/powerlevel9k.git
+    dest: /home/zhudson/.oh-my-zsh/custom/themes/powerlevel9k 
+
+
+- name: change shell to zsh
+  become: yes
+  lineinfile:
+        create: yes
+        dest: /home/zhudson/.zshrc
+        regexp: '^ZSH_THEME'
+        line : 'ZSH_THEME="powerlevel9k/powerlevel9k"'
+
+
 - name: install powerline 
   tags: installs
   pip: 
