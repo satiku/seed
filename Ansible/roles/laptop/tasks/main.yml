@@ -38,10 +38,8 @@
   become: yes
   become_user: zhudson
   git:
-    repo: git://github.com/tobi-wan-kenobi/bumblebee-status
+    repo: https://github.com/tobi-wan-kenobi/bumblebee-status
     dest: /home/zhudson/.bumblebee-status 
-
-
 
 - name: install oh-my-zsh
   shell: sh -c "$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)"
@@ -66,6 +64,13 @@
      - requests
      - power 
      - i3ipc
+
+
+- name: add zsh config 
+  tags: configs
+  copy: 
+    src: files/.zshrc
+    dest: ~/.zshrc
 
 
 - name: add bar config 
