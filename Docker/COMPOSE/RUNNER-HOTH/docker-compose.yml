@@ -4,8 +4,8 @@ services:
   radarr:
     image: linuxserver/radarr:arm32v6-latest
     environment:
-#       - PUID=100
-#       - PGID=4096
+       - PUID=0
+       - PGID=100
        - TZ=US/Eastern
     volumes:
       - type: volume
@@ -32,8 +32,8 @@ services:
   sonarr:
     image: linuxserver/sonarr:arm32v6-latest
     environment:
-       - PUID=100
-       - PGID=4096
+       - PUID=0
+       - PGID=100
        - TZ=US/Eastern
     volumes:
       - type: volume
