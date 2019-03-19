@@ -102,32 +102,32 @@ volumes:
     driver_opts:
       type: "nfs"
       o: "addr=10.5.11.20,nolock,soft,rw"
-      device: ":/export/Volumes/$HOST/RUNNER-HOTH/deluge"
+      device: ":/export/Volumes/DEV1/RUNNER-HOTH/deluge"
   radarr-volume:
     driver_opts:
       type: "nfs"
       o: "addr=10.5.11.20,nolock,soft,rw"
-      device: ":/export/Volumes/$HOST/RUNNER-HOTH/radarr"
+      device: ":/export/Volumes/DEV1/RUNNER-HOTH/radarr"
   movies-completed-volume:
     driver_opts:
       type: "nfs"
       o: "addr=10.5.11.20,nolock,soft,rw"
-      device: ":/export/Volumes/$HOST/RUNNER-HOTH/deluge/movies"
+      device: ":/export/Volumes/DEV1/RUNNER-HOTH/deluge/movies"
   sonarr-volume:
     driver_opts:
       type: "nfs"
       o: "addr=10.5.11.20,nolock,soft,rw"
-      device: ":/export/Volumes/$HOST/RUNNER-HOTH/sonarr"
+      device: ":/export/Volumes/DEV1/RUNNER-HOTH/sonarr"
   shows-downloads-volume:
     driver_opts:
       type: "nfs"
       o: "addr=10.5.11.20,nolock,soft,rw"
-      device: ":/export/Volumes/$HOST/RUNNER-HOTH/deluge/shows"
+      device: ":/export/Volumes/DEV1/RUNNER-HOTH/deluge/shows"
   jackett-volume:
     driver_opts:
       type: "nfs"
       o: "addr=10.5.11.20,nolock,soft,rw"
-      device: ":/export/Volumes/$HOST/RUNNER-HOTH/jackett/"
+      device: ":/export/Volumes/DEV1/RUNNER-HOTH/jackett/"
   archive-movies-volume:
     driver_opts:
       type: "nfs"
