@@ -1,0 +1,167 @@
+
+version: '3.2'
+services:
+  radarr:
+    image: linuxserver/radarr:arm32v6-latest
+    environment:
+       - PUID=0
+       - PGID=100
+       - TZ=US/Eastern
+    volumes:
+      - type: volume
+        source: radarr-volume
+        target: /config
+        volume:
+          nocopy: true
+      - type: volume
+        source: movies-completed-volume
+        target: /downloads
+        volume:
+          nocopy: true
+      - type: volume
+        source: archive-movies-volume
+        target: /movies
+        volume:
+          nocopy: true
+    ports:  
+      - "7878:7878"
+    networks: 
+      - radarr-tor
+      - radarr-deluge
+      - radarr-jackett
+  sonarr:
+    image: linuxserver/sonarr:arm32v6-latest
+    environment:
+       - PUID=0
+       - PGID=100
+       - TZ=US/Eastern
+    volumes:
+      - type: volume
+        source: sonarr-volume
+        target: /config
+        volume:
+          nocopy: true
+      - type: volume
+        source: shows-downloads-volume
+        target: /downloads
+        volume:
+          nocopy: true
+      - type: volume
+        source: archive-shows-volume
+        target: /tv
+        volume:
+          nocopy: true
+    ports:  
+      - "8989:8989"
+    networks: 
+      - sonarr-tor
+      - sonarr-deluge
+      - sonarr-jackett
+  deluge:
+    build: ../../Deluge/deluge/
+    image: 10.5.11.12:5000/deluge
+    volumes:
+      - type: volume
+        source: deluge-volume
+        target: /mnt
+        volume:
+          nocopy: true
+    ports:
+      - "58846:58846"
+    networks:
+      - deluge-tor
+      - radarr-deluge
+  jackett:
+    image: linuxserver/jackett:arm32v6-latest
+    environment:
+      - TZ=US/Eastern
+    volumes:
+      - type: volume
+        source: jackett-volume
+        target: /config
+        volume:
+          nocopy: true
+    ports:
+      - 9117:9117    
+    networks:
+      - radarr-jackett
+      - sonarr-jackett
+      - jackett-tor
+  tor:
+    build: ../../Tor/tor
+    image: 10.5.11.12:5000/tor
+    ports:
+        - "9050:9050"
+    networks:
+        - radarr-tor
+        - sonarr-tor
+        - deluge-tor
+        - jackett-tor
+volumes:
+  deluge-volume:
+    driver_opts:
+      type: "nfs"
+      o: "addr=10.5.11.20,nolock,soft,rw"
+      device: ":/export/Volumes/DEV1/RUNNER-HOTH/deluge"
+  radarr-volume:
+    driver_opts:
+      type: "nfs"
+      o: "addr=10.5.11.20,nolock,soft,rw"
+      device: ":/export/Volumes/DEV1/RUNNER-HOTH/radarr"
+  movies-completed-volume:
+    driver_opts:
+      type: "nfs"
+      o: "addr=10.5.11.20,nolock,soft,rw"
+      device: ":/export/Volumes/DEV1/RUNNER-HOTH/deluge/movies"
+  sonarr-volume:
+    driver_opts:
+      type: "nfs"
+      o: "addr=10.5.11.20,nolock,soft,rw"
+      device: ":/export/Volumes/DEV1/RUNNER-HOTH/sonarr"
+  shows-downloads-volume:
+    driver_opts:
+      type: "nfs"
+      o: "addr=10.5.11.20,nolock,soft,rw"
+      device: ":/export/Volumes/DEV1/RUNNER-HOTH/deluge/shows"
+  jackett-volume:
+    driver_opts:
+      type: "nfs"
+      o: "addr=10.5.11.20,nolock,soft,rw"
+      device: ":/export/Volumes/DEV1/RUNNER-HOTH/jackett/"
+  archive-movies-volume:
+    driver_opts:
+      type: "nfs"
+      o: "addr=10.5.11.20,nolock,soft,rw"
+      device: ":/export/Archive/Videos/Movies"
+  archive-shows-volume:
+    driver_opts:
+      type: "nfs"
+      o: "addr=10.5.11.20,nolock,soft,rw"
+      device: ":/export/Archive/Videos/Shows"
+
+
+networks:
+  radarr-tor:
+    driver: overlay
+    attachable: true
+  radarr-deluge:
+    driver: overlay
+    attachable: true
+  radarr-jackett:
+    driver: overlay
+    attachable: true
+  sonarr-tor:
+    driver: overlay
+    attachable: true
+  sonarr-deluge:
+    driver: overlay
+    attachable: true
+  sonarr-jackett:
+    driver: overlay
+    attachable: true
+  deluge-tor:
+    driver: overlay
+    attachable: true
+  jackett-tor:
+    driver: overlay
+    attachable: true
