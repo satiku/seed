@@ -5,6 +5,3 @@ backend default {
     .port = "8096";
 }
 
-sub vcl_backend_response {
-  set beresp.ttl = 6h;
-}
