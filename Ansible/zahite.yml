@@ -17,6 +17,14 @@
 
 
 
+-   name: build vmhost1
+    hosts vmhost1:
+    user: solo
+    become: true
+    roles:
+      - x64-vmhost
+
+
 
 # -   name: setup docker hosts
 #     hosts: platform
