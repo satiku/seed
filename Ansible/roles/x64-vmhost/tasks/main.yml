@@ -17,7 +17,7 @@
     - vim
     - curl
     - tmux
-
+    - policykit-1
 
 
 - name: Add an Apt signing key, uses whichever key is at the URL
