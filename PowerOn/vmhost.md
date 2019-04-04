@@ -5,7 +5,11 @@
 
 
 
+```
+cat vmhost.md | sed  's/... VM_NAME  }}/test/' | sed  's/... VM_NAME  }}/test/'
 
+
+```
 
 
 ```
