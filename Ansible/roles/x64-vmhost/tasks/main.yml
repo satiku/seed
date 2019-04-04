@@ -37,9 +37,9 @@
     
 
 
-#- name: install docker-ce
-#  apt: 
-#    name: docker-ce=18.06.0~ce~3-0~debian  
-#    state: present
-#  tags: packages
-#
+- name: install docker-ce
+  apt: 
+    name: virtualbox-6.0=6.0.4-128413~Debian~stretch  
+    state: present
+  tags: packages
+
