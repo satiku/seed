@@ -128,4 +128,4 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias s='f(){ stamp=`date +"%m-%d-%y"`; script -c "ssh $1" $stamp-$1 ;  unset -f f; }; f'
+alias s='f(){ stamp=`date +"%m-%d-%y"`; script -c "ssh $1" ~/ssh-logs/$stamp-$1 ;  unset -f f; }; f'
