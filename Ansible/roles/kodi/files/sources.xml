@@ -19,6 +19,11 @@
             <path pathversion="1">/drives/archive/Videos/</path>
             <allowsharing>true</allowsharing>
         </source>
+        <source>
+            <name>Videos_NFS</name>
+            <path pathversion="1">nfs://10.5.11.20//export/Archive/Videos</path>
+            <allowsharing>true</allowsharing>
+        </source>
     </video>
     <music>
         <default pathversion="1"></default>
