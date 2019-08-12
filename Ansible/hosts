@@ -16,6 +16,9 @@
 [livingspace]
 10.5.10.107
 
+[desk]
+10.5.10.110
+
 [bedroom]
 10.5.10.100
 
@@ -99,7 +102,7 @@ platform01
 
 [pitop:children]
 livingspace
-bedroom
+desk
 
 
 [docker-lab:children]
