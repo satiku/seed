@@ -43,12 +43,20 @@
             <path pathversion="1">http://lazykodi.com/</path>
             <allowsharing>true</allowsharing>
         </source>
-
         <source>
             <name>Supremacy</name>
             <path pathversion="1">http://supremacy.org.uk/zip/repo/</path>
             <allowsharing>true</allowsharing>
         </source>
-
+        <source>
+            <name>Exodus Redux - add repo</name>
+            <path pathversion="1">https://i-a-c.github.io/</path>
+            <allowsharing>true</allowsharing>
+        </source>
+        <source>
+            <name>Exodus v8 - install kodi bae repo</name>
+            <path pathversion="1">http://mega-tron.tv/transform</path>
+            <allowsharing>true</allowsharing>
+        </source>
     </files>
 </sources>
