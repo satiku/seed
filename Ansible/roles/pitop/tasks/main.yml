@@ -39,6 +39,26 @@
 
 
 
+- name: set mountpoints
+  mount: 
+    name: /mnt/nfs1/volumes 
+    src: 10.5.11.20:/export/Volumes/ 
+    fstype: nfs 
+    state: mounted
+
+
+- name: set mountpoints
+  mount: 
+    name: /mnt/nfs1/archive 
+    src: 10.5.11.20:/export/Archive/ 
+    fstype: nfs 
+    state: mounted
+
+
+
+
+
+
 
 #- name: Unarchive a file that needs to be downloaded (added in 2.0)
 #  unarchive:
