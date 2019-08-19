@@ -22,6 +22,8 @@
 [bedroom]
 10.5.10.100
 
+[kitchen]
+10.5.10.112
 
 
 [DEV1-FRONT]
@@ -103,7 +105,7 @@ platform01
 [pitop:children]
 livingspace
 desk
-
+kitchen
 
 [docker-lab:children]
 lab1
