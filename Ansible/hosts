@@ -105,7 +105,7 @@ platform01
 [pitop:children]
 livingspace
 desk
-kitchen
+
 
 [docker-lab:children]
 lab1
