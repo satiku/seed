@@ -46,7 +46,7 @@
     - pitop
     - kodi
     - base-pi
-
+    - moonlight
 
 - name: docker lab/dev
   hosts: docker-lab
