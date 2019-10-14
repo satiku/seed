@@ -1,52 +1,52 @@
 [all]
 
 
-[lab1]
-10.5.10.20
+[pi-lab1]
+10.8.0.130
 
 [odroid-lab]
 10.5.10.30
 
 
-[adminutl:children]
+#[adminutl:children]
 #adminutl1
-adminutl2
+#adminutl2
 
 
-[INFRA-SRV:children]
-INFRA-SRV1
-INFRA-SRV2
+#[INFRA-SRV:children]
+#INFRA-SRV1
+#INFRA-SRV2
 
 
-[platform-servers:children]
-platform01
-platform03
+#[platform-servers:children]
+#platform01
+#platform03
 
-[DEV1:children]
-DEV1-FRONT
-DEV1-BACK
+#[DEV1:children]
+#DEV1-FRONT
+#DEV1-BACK
 
 
-[platform:children]
-platform01
+#[platform:children]
+#platform01
 #platform02
 
 
 [pitop:children]
-livingspace
-bedroom
+#livingspace
+#bedroom
+pi-lab1
 
-
-[docker-lab:children]
-lab1
+#[docker-lab:children]
+#pi-lab1
 #bedroom
 
-[pi-miners:children]
-livingspace
+#[pi-miners:children]
+#livingspace
 
 
-[rockets:children]
-rocket00
+#[rockets:children]
+#rocket00
 #rocket01
-rocket11
-rocket02
+#rocket11
+#rocket02
