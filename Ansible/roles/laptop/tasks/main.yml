@@ -23,7 +23,7 @@
     - luakit
     - zsh
     - fonts-font-awesome
-
+    - git
 
 - name: change shell to zsh
   become: yes
@@ -115,6 +115,11 @@
   copy: 
     src: files/.bashrc
     dest: ~/.bashrc
+
+- name: Create i3 config dir 
+  file: 
+    path: ~/.config/i3
+    state: directory
 
 
 - name: add i3 config 
