@@ -24,6 +24,7 @@
     - zsh
     - fonts-font-awesome
     - git
+    - xfce4-terminal   
 
 - name: change shell to zsh
   become: yes
@@ -127,6 +128,20 @@
   copy: 
     src: files/config
     dest: ~/.config/i3/config
+
+
+
+- name: create xfce4 termnal config dir  
+  file: 
+    path: ~/.config/xfce4/terminal/
+    state: directory
+
+
+- name: copy xfce4 terminal config 
+  tags: configs
+  copy: 
+    src: files/terminalrc
+    dest: ~/.config/xfce4/terminal/terminalrc
 
 
 - name: add vim  config 
