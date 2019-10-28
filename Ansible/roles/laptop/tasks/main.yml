@@ -167,6 +167,7 @@
 
 - name: add lightdm.conf 
   tags: configs
+  become: true 
   copy: 
     src: files/lightdm.conf
     dest: /etc/lightdm/lightdm.conf
@@ -175,6 +176,7 @@
 
 - name: add lightdm-gtk-greeter.conf 
   tags: configs
+  become: true 
   copy: 
     src: files/lightdm-gtk-greeter.conf
     dest: /etc/lightdm/lightdm-gtk-greeter.conf
