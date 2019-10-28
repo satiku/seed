@@ -109,6 +109,12 @@
     src: files/bg.jpg
     dest: ~/bg.jpg
 
+- name: copy background image 
+  tags: configs
+  copy: 
+    src: files/bg.png
+    dest: ~/bg.png
+
 
 - name: add bash config 
   tags: configs
