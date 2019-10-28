@@ -183,10 +183,49 @@
  
 
 
+
+
+
+
+
+
+- name: install i3-gaps dependencies 
+  become: true 
+  tags: installs
+  apt:
+    update_cache: yes
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - gcc 
+    - make 
+    - dh-autoreconf 
+    - libxcb-keysyms1-dev 
+    - libpango1.0-dev 
+    - libxcb-util0-dev 
+    - xcb 
+    - libxcb1-dev 
+    - libxcb-icccm4-dev 
+    - libyajl-dev 
+    - libev-dev 
+    - libxcb-xkb-dev 
+    - libxcb-cursor-dev 
+    - libxkbcommon-dev 
+    - libxcb-xinerama0-dev 
+    - libxkbcommon-x11-dev 
+    - libstartup-notification0-dev 
+    - libxcb-randr0-dev 
+    - libxcb-xrm0 
+    - libxcb-xrm-dev 
+    - libxcb-shape0-dev
+
+
+
+
 - name : pull i3-gaps 
   become: yes
   become_user: zhudson
-  register: pull_i3-gaps
+  register: pull_i3gaps
   git:
     repo: https://github.com/Airblader/i3 
     dest: /home/zhudson/i3-gaps
@@ -196,9 +235,12 @@
 
 
 - name: run i3-gaps compile script 
-  become: true
-  when: pull_i3-gaps.changed
+  become: yes
+  become_user: zhudson
+  when: pull_i3gaps.changed
   script: files/i3-gaps_install.sh 
+  args:
+    chdir: /home/zhudson
 
 
 
