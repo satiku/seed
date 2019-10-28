@@ -23,7 +23,7 @@
     - luakit
     - zsh
     - fonts-font-awesome
-
+    - lightdm
 
 - name: change shell to zsh
   become: yes
@@ -135,6 +135,24 @@
   copy: 
     src: files/tmux.conf
     dest: ~/.tmux.conf
+
+
+- name: add lightdm.conf 
+  tags: configs
+  copy: 
+    src: files/lightdm.conf
+    dest: /etc/lightdm/lightdm.conf
+ 
+
+
+- name: add lightdm-gtk-greeter.conf 
+  tags: configs
+  copy: 
+    src: files/lightdm-gtk-greeter.conf
+    dest: /etc/lightdm/lightdm-gtk-greeter.conf
+ 
+
+
 
 
 
