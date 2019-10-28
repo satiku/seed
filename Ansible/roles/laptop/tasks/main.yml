@@ -183,7 +183,22 @@
  
 
 
+- name : pull i3-gaps 
+  become: yes
+  become_user: zhudson
+  register: pull_i3-gaps
+  git:
+    repo: https://github.com/Airblader/i3 
+    dest: /home/zhudson/i3-gaps
 
+
+
+
+
+- name: run i3-gaps compile script 
+  become: true
+  when: pull_i3-gaps.changed
+  script: files/i3-gaps_install.sh 
 
 
 
