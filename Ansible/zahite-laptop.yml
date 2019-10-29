@@ -1,6 +1,6 @@
 ---
 - name: latop 
-  hosts: laptop
+  hosts: localhost
   user: zhudson
   roles:
     - laptop
