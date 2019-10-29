@@ -26,7 +26,8 @@
     - lightdm
     - git
     - xfce4-terminal   
-
+    - ansible
+    - openvpn
 
 - name: change shell to zsh
   become: yes
