@@ -18,7 +18,8 @@
     - gnupg2
     - software-properties-common
     - python-pip
-
+    - libffi-dev
+    - libssl-dev
 
 
 
