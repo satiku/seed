@@ -1,8 +1,8 @@
 [all]
 
 
-[laptop]
-127.0.0.1
+[desktop_1-debian1]
+10.8.0.200
 
 [INFRA-SRV2]
 10.5.11.10
@@ -24,4 +24,8 @@ desk
 
 [pi-miners:children]
 livingspace
+
+[debian-desktops]
+desktop_1-debian1]
+
 
