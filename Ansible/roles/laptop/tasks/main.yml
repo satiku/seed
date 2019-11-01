@@ -28,6 +28,10 @@
     - xfce4-terminal   
     - ansible
     - openvpn
+    - firefox-esr
+    - htop
+
+
 
 - name: change shell to zsh
   become: yes
