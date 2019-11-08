@@ -26,6 +26,11 @@
     - lightdm
     - git
     - xfce4-terminal   
+    - ansible
+    - openvpn
+    - firefox-esr
+    - htop
+
 
 
 - name: change shell to zsh
@@ -183,6 +188,13 @@
  
 
 
+
+- name : pull the seed repo  
+  become: yes
+  become_user: zhudson
+  git:
+    repo: https://github.com/satiku/seed
+    dest: /home/zhudson/projects/seed
 
 
 
