@@ -1,0 +1,42 @@
+---
+
+# format drive ext4 
+# brick01 
+# volume01 
+# drive01
+#
+#
+
+- name: install glusterfs-server
+  apt:
+    update_cache: yes
+    name: "{{ packages }}" 
+    state: present
+  vars:
+    packages: 
+    - nfs-kernel-server
+    - nfs-common
+
+
+
+- name: Create a ext4 filesystem on /dev/sda1 and check disk blocks
+  filesystem:
+#    force: yes    
+    fstype: ext4
+    dev: /dev/sda1
+
+- name: Mount up device by label
+  mount:
+    name: /export/drive_1
+    src: /dev/sda1
+    fstype: ext4
+    state: mounted
+
+
+- name: Start service glusterd, if not running
+  service:
+    name: nfs-kernel-server 
+    state: restarted
+
+
+
