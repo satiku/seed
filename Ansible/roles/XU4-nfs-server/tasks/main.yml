@@ -9,7 +9,7 @@
 
 - name: install glusterfs-server
   apt:
-    update_cache: yes
+#    update_cache: yes
     name: "{{ packages }}" 
     state: present
   vars:
@@ -18,20 +18,26 @@
     - nfs-common
 
 
+# 
+# - name: Create a ext4 filesystem on /dev/sda1 and check disk blocks
+#   filesystem:
+#     force: yes    
+#     fstype: ext4
+#     dev: /dev/sda1
+# 
+# - name: Mount up device by label
+#   mount:
+#     name: /export
+#     src: /dev/sda1
+#     fstype: ext4
+#     state: mounted
+# 
+# 
 
-- name: Create a ext4 filesystem on /dev/sda1 and check disk blocks
-  filesystem:
-#    force: yes    
-    fstype: ext4
-    dev: /dev/sda1
-
-- name: Mount up device by label
-  mount:
-    name: /export/drive_1
-    src: /dev/sda1
-    fstype: ext4
-    state: mounted
-
+- name: add nfs server config 
+  copy: 
+    src: files/exports 
+    dest: /etc/exports
 
 - name: Start service glusterd, if not running
   service:
