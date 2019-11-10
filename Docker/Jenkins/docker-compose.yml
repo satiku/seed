@@ -3,7 +3,7 @@ version: '3.2'
 services:
   jenkins:
     build: jenkins/
-    image: 10.5.11.12:5000jenkins
+    image: 10.5.11.12:5000/jenkins
     volumes:
       - type: volume
         source: jenkins-volume
