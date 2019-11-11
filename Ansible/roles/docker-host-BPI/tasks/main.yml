@@ -21,8 +21,7 @@
     - python-pip
     - libffi-dev
     - libssl-dev
-
-
+    - python-setuptools
 
 
 - name: add docker group
