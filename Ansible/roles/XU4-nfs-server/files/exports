@@ -7,4 +7,5 @@
 # Example for NFSv4:
 # /srv/nfs4        gss/krb5i(rw,sync,fsid=0,crossmnt,no_subtree_check)
 /export/Archive/Videos       0.0.0.0/0.0.0.0(rw,sync,no_subtree_check,no_root_squash,all_squash,insecure)
+/export/Volumes       0.0.0.0/0.0.0.0(rw,sync,no_subtree_check,no_root_squash,all_squash,insecure)
 #
