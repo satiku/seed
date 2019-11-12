@@ -1,4 +1,4 @@
-FROM arm32v7/nginx:1.15
+FROM arm32v7/nginx:1.16.1
 
 ENV SET_CONTAINER_TIMEZONE false 
 ENV CONTAINER_TIMEZONE "" 
@@ -20,9 +20,10 @@ RUN apt-get update && apt-get install -y \
 # RUN rm /etc/nginx/sites-enabled/default
 
 # add theme
-WORKDIR /usr/share/nginx/html
+WORKDIR /var/www/html
 
-RUN git clone https://github.com/lewish/asciiflow2.git
+RUN rm -rf *
+RUN git clone https://github.com/lewish/asciiflow2.git ./
 
 EXPOSE 80
 
