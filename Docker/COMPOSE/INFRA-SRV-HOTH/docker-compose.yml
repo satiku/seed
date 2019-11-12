@@ -14,7 +14,7 @@ services:
     build: ../../DDClient/ddclient
     image: ddclient
     volumes:
-      - /home/pi/locals/ddclient/ddclient.conf:/etc/ddclient.conf
+      - /home/solo/ddclient.conf:/etc/ddclient.conf
 
   registry:
     image: arm32v6/registry:2.7.1 
