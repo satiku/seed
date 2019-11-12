@@ -50,7 +50,7 @@ services:
       WEBPASSWORD: Password1
 
   jenkins:
-    build: jenkins/
+    build: ../../Jenkins/jenkins/
     image: satiku/jenkins
     volumes:
       - type: volume
