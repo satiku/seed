@@ -19,9 +19,9 @@
     - gnupg2
     - software-properties-common
     - python-pip
-
-
-
+    - libffi-dev
+    - libssl-dev
+    - python-setuptools
 
 
 - name: add docker group
@@ -49,14 +49,14 @@
 
 
 - apt_repository:
-    repo: deb [arch=armhf] https://download.docker.com/linux/debian stretch stable
+    repo: deb [arch=armhf] https://download.docker.com/linux/debian buster stable
     state: present
 
 
 - name: update apt cache
   apt:
     update_cache: yes
-    
+
 
 
 - name: install docker-ce
