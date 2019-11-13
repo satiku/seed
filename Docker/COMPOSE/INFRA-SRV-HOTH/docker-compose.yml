@@ -14,7 +14,7 @@ services:
     build: ../../DDClient/ddclient
     image: ddclient
     volumes:
-      - /home/pi/locals/ddclient/ddclient.conf:/etc/ddclient.conf
+      - /home/solo/ddclient.conf:/etc/ddclient.conf
 
   registry:
     image: arm32v6/registry:2.7.1 
@@ -49,12 +49,31 @@ services:
       DNS2: 8.8.8.8
       WEBPASSWORD: Password1
 
+  jenkins:
+    build: ../../Jenkins/jenkins/
+    image: satiku/jenkins
+    volumes:
+      - type: volume
+        source: jenkins-volume
+        target: /root/.jenkins/
+        volume:
+          nocopy: true
+    ports:  
+      - "8080:8080"
+
+    
 volumes:
   registry-volume:
     driver_opts:
       type: "nfs"
       o: "addr=10.5.11.20,nolock,soft,rw"
       device: ":/export/Volumes/$HOST/INFRA-SRV-HOTH/registry"
+
+  jenkins-volume:
+    driver_opts:
+      type: "nfs"
+      o: "addr=10.5.11.20,nolock,soft,rw"
+      device: ":/export/Volumes/$HOST/jenkins"
 
 
 networks:

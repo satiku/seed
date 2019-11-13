@@ -1,0 +1,24 @@
+
+version: '3.2'
+services:
+  jenkins:
+    build: jenkins/
+    image: satiku/jenkins
+    volumes:
+      - type: volume
+        source: jenkins-volume
+        target: /root/.jenkins/
+        volume:
+          nocopy: true
+    ports:  
+      - "8080:8080"
+
+volumes:
+  jenkins-volume:
+    driver_opts:
+      type: "nfs"
+      o: "addr=10.5.11.20,nolock,soft,rw"
+      device: ":/export/Volumes/$HOST/jenkins"
+
+
+
