@@ -4,8 +4,18 @@
 [pi-lab1]
 10.8.0.130
 
+[xu4-lab1]
+10.8.0.131
+
 
 [pitop:children]
 #livingspace
 #bedroom
 pi-lab1
+
+
+
+
+
+[xu4-lab:children]
+xu4-lab1
