@@ -19,9 +19,11 @@
     - gnupg2
     - software-properties-common
     - python-pip
-
-
-
+    - libffi-dev
+    - libssl-dev
+    - python-setuptools
+    - gcc-arm-linux-gnueabihf
+    - python-nacl 
 
 - name: add docker group
   tags: configs
