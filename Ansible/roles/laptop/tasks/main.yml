@@ -17,6 +17,7 @@
     - compton 
     - lemonbar
     - python-pip 
+    - python3-pip 
     - fonts-powerline
     - tmux
     - conky 
@@ -91,6 +92,19 @@
      - power 
      - i3ipc
 
+
+- name: pip modules for bumblebee status line 
+  tags: installs
+  pip: 
+   executable: pip3
+   name: "{{  modules  }}"
+  vars:
+    modules:
+     - psutil
+     - netifaces
+     - requests
+     - power 
+     - i3ipc
 
 - name: add zsh config 
   tags: configs
