@@ -1,0 +1,13 @@
+source "~/.mutt/gmail.zconingford"
+
+macro index <f4> '<sync-mailbox><enter-command>source ~/.mutt/gmail.zconingford<enter><change-folder>!<enter>'
+macro index <f5> '<sync-mailbox><enter-command>source ~/.mutt/gmail.satiku<enter><change-folder>!<enter>'
+
+macro index,pager \cb "<pipe-message> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+
+macro attach,compose \cb "<pipe-entry> urlscan<Enter>" "call urlscan to extract URLs out of a message"
+
+
+auto_view text/html                                      # view html automatically
+alternative_order text/plain text/enriched text/html     # save html for last
+

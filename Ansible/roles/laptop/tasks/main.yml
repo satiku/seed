@@ -30,7 +30,7 @@
     - openvpn
     - firefox-esr
     - htop
-
+    - mutt
 
 
 - name: change shell to zsh
@@ -198,7 +198,25 @@
 
 
 
+- name: add base mutt config 
+  tags: configs
+  copy: 
+    src: files/.muttrc
+    dest: ~/.muttrc
 
+
+- name: add base mutt gmail.satiku config 
+  tags: configs
+  template: 
+    src: templates/gmail.satiku.j2
+    dest: ~/.mutt/gmail.satiku
+
+
+- name: add base mutt config 
+  tags: configs
+  template: 
+    src: templates/gmail.zconingford.j2
+    dest: ~/.mutt/gmail.zconingford
 
 
 - name: install i3-gaps dependencies 
