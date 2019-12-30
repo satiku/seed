@@ -1,26 +1,40 @@
 
-create solo user 
-`adduser solo`
+SPECS
 
-add solo to sudo 
-`usermod -aG sudo solo`
+Memory: 2GB - 4GB
+Drive: 32GB 
+
+
+INSTALL Options 
+No desktop enviorment 
+Add SSH server
+
+
+POST Install 
+
+comment out cd-rom repo 
+
+
+run as root
+`su -`
+
+apt-get update 
+apt-get install git ansible sudo  
+
+
+`usermod -aG sudo zhudson`
 
 edit visudo add to end of file 
-`solo ALL=(ALL) NOPASSWD: ALL`
-
-set static ip  
-
-```
-auto eth0
-iface eth0 inet static
-    address xxx.xxx.xxx.xxx 
-    netmask xxx.xxx.xxx.xxx
-    broadcast xxx.xxx.xxx.xxx
-    gateway xxx.xxx.xxx.xxx 
-    dns-nameservers xxx.xxx.xxx.xxx 
-
-```
+`zhudson ALL=(ALL) NOPASSWD: ALL`
 
 
-? install python 
+ssh-keygen
+ssh-copy-id zhudson@127.0.0.1
+
+clone seed repo and run ansible-playbook on localhost
+playbook may freeze on oh-my-zsh
+
+
+apt-get install linux-headers-amd64 make gcc perl 
+    sh ./VBoxLinuxAdditions.run
 
