@@ -17,6 +17,7 @@
     - compton 
     - lemonbar
     - python-pip 
+    - python3-pip 
     - fonts-powerline
     - tmux
     - conky 
@@ -30,7 +31,7 @@
     - openvpn
     - firefox-esr
     - htop
-
+    - mutt
 
 
 - name: change shell to zsh
@@ -91,6 +92,19 @@
      - power 
      - i3ipc
 
+
+- name: pip modules for bumblebee status line 
+  tags: installs
+  pip: 
+   executable: pip3
+   name: "{{  modules  }}"
+  vars:
+    modules:
+     - psutil
+     - netifaces
+     - requests
+     - power 
+     - i3ipc
 
 - name: add zsh config 
   tags: configs
@@ -187,6 +201,27 @@
     dest: /etc/lightdm/lightdm-gtk-greeter.conf
  
 
+- name: add base mutt config 
+  tags: configs
+  copy: 
+    src: files/.muttrc
+    dest: ~/.muttrc
+
+
+- name: add base mutt gmail.satiku config 
+  tags: configs
+  template: 
+    src: templates/gmail.satiku.j2
+    dest: ~/.mutt/gmail.satiku
+
+
+- name: add base mutt config 
+  tags: configs
+  template: 
+    src: templates/gmail.zconingford.j2
+    dest: ~/.mutt/gmail.zconingford
+
+
 
 
 - name : pull the seed repo  
@@ -198,7 +233,25 @@
 
 
 
+- name: add base mutt config 
+  tags: configs
+  copy: 
+    src: files/.muttrc
+    dest: ~/.muttrc
 
+
+- name: add base mutt gmail.satiku config 
+  tags: configs
+  template: 
+    src: templates/gmail.satiku.j2
+    dest: ~/.mutt/gmail.satiku
+
+
+- name: add base mutt config 
+  tags: configs
+  template: 
+    src: templates/gmail.zconingford.j2
+    dest: ~/.mutt/gmail.zconingford
 
 
 - name: install i3-gaps dependencies 
