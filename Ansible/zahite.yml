@@ -8,12 +8,21 @@
       - docker-host-XU4
 
 
+
 -   name: build odroid lab
     hosts: odroid-lab
     user: solo
     become: true
     roles:
       - docker-host-XU4
+
+
+-   name: build odroid lab
+    hosts: x64-lab
+    user: zhudson
+    become: true
+    roles:
+      - docker-host-X64
 
 
 
