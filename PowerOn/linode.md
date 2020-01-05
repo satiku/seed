@@ -1,6 +1,6 @@
 
 create solo user 
-`adduser solo`
+`adduser -m -s /bin/bash solo`
 
 set solo password 
 `passwd solo`
