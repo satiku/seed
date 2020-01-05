@@ -1,0 +1,18 @@
+version: "3.2"
+services:
+
+
+
+  taskd:
+    image: x4121/taskd:latest
+    volumes:
+      - "/docker/volumes/taskd:/var/taskd"
+    ports:
+      - "53589:53589"
+    environment:
+      CERT_CN: "taris.zahite.net"
+      CERT_ORGANIZATION: "zahite"
+      CERT_COUNTRY: "US"
+      CERT_STATE: "Rhode Island"
+      CERT_LOCALITY: "Warwick"
+    restart: always

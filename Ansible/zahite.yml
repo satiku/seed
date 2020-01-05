@@ -10,7 +10,7 @@
 
 
 -   name: build odroid lab
-    hosts: odroid-lab
+    hosts: xu4-lab
     user: solo
     become: true
     roles:
