@@ -1,6 +1,29 @@
 version: "3.2"
 services:
+  freshrss_postgresql:
+    image: postgres
+    restart: unless-stopped
+    volumes:
+      - /docker/volumes/freshrss_postgresql:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER_FILE=/run/secrets/freshrss_db_user
+      - POSTGRES_PASSWORD_FILE=/run/secrets/freshrss_db_password
+      - POSTGRES_DB=freshrss
+    secrets:
+      - freshrss_db_user
+      - freshrss_db_password
 
+  freshrss:
+    image: freshrss/freshrss
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    depends_on:
+      - freshrss_postgresql
+    volumes:
+      - /docker/volumes/freshrss:/var/www/FreshRSS/data
+    environment:
+      - CRON_MIN=*/20
 
 
   taskd:
@@ -16,3 +39,17 @@ services:
       CERT_STATE: "Rhode Island"
       CERT_LOCALITY: "Warwick"
     restart: always
+
+
+
+
+
+secrets:
+  freshrss_db_user:
+    file: freshrss_db_user.txt
+  freshrss_db_password:
+    file: freshrss_db_password.txt
+ 
+
+
+
