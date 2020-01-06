@@ -1,16 +1,16 @@
 
-SPECS
+##SPECS
 
 Memory: 2GB - 4GB
 Drive: 32GB 
 
 
-INSTALL Options 
+##INSTALL Options 
 No desktop enviorment 
 Add SSH server
 
 
-POST Install 
+##POST Install 
 
 comment out cd-rom repo 
 
@@ -34,7 +34,7 @@ ssh-copy-id zhudson@127.0.0.1
 clone seed repo and run ansible-playbook on localhost
 playbook may freeze on oh-my-zsh
 
-
+## Pending
 apt-get install linux-headers-amd64 make gcc perl 
     sh ./VBoxLinuxAdditions.run
 
